@@ -12,6 +12,76 @@ const byId = id => products.find(product => product.id === id);
 const imagePath = (product, view = 'folded') => product.images[view] || product.images.body || Object.values(product.images)[0];
 const designCode = product => `TANEE-${product.id.toUpperCase()}`;
 
+const banners = [
+  {label: 'Colour in every fold', first: 'Beautiful from', second: 'every fold.', description: 'Discover striking shades, graceful folds and borders that draw the eye.', image: 'assets/banners/elegant-folds.webp', alt: 'Teal, maroon, magenta and mauve sarees folded on ivory', theme: 'light'},
+  {label: 'The black and gold edit', first: 'A statement in', second: 'black & gold.', description: 'A classic contrast with a luminous finish, made for a memorable entrance.', image: 'assets/banners/black-gold.webp', alt: 'Close view of a black saree with gold woven details', theme: 'dark'},
+  {label: 'The contrast edit', first: 'Contrast that', second: 'captivates.', description: 'Charcoal and mustard meet in a bold pairing with a beautiful border.', image: 'assets/banners/charcoal-mustard.webp', alt: 'Charcoal and mustard saree with a metallic border', theme: 'light'},
+  {label: 'Colour stories', first: 'Colour,', second: 'beautifully paired.', description: 'Teal and magenta bring fresh energy to a timeless drape.', image: 'assets/banners/teal-magenta.webp', alt: 'Teal and magenta sarees draped together on ivory', theme: 'light'},
+  {label: 'Softly expressive', first: 'Soft tones.', second: 'Lasting impression.', description: 'A quieter palette of sage and mauve, full of movement and detail.', image: 'assets/banners/sage-mauve.webp', alt: 'Sage and mauve sarees arranged in soft waves', theme: 'light'}
+];
+const bannerHero = document.querySelector('.banner-hero');
+const bannerLayers = [...document.querySelectorAll('.banner-slide')];
+const bannerPagination = document.getElementById('bannerPagination');
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+let bannerIndex = 0;
+let bannerLayer = 0;
+let bannerTimer;
+let bannerRequest = 0;
+
+function scheduleBanner() {
+  clearTimeout(bannerTimer);
+  if (!reduceMotion.matches && !document.hidden && !bannerHero.matches(':hover') && !bannerHero.matches(':focus-within')) {
+    bannerTimer = setTimeout(() => showBanner((bannerIndex + 1) % banners.length), 6500);
+  }
+}
+
+async function showBanner(index) {
+  const request = ++bannerRequest;
+  bannerIndex = (index + banners.length) % banners.length;
+  const banner = banners[bannerIndex];
+  const nextLayer = 1 - bannerLayer;
+  const image = bannerLayers[nextLayer].querySelector('img');
+  image.src = banner.image;
+  image.alt = banner.alt;
+  try { await image.decode(); } catch { return; }
+  if (request !== bannerRequest) return;
+  document.getElementById('bannerEyebrow').textContent = `✦  ${banner.label.toUpperCase()}`;
+  const title = document.getElementById('hero-title');
+  const emphasis = document.createElement('em'); emphasis.textContent = banner.second;
+  title.replaceChildren(document.createTextNode(banner.first), document.createElement('br'), emphasis);
+  document.getElementById('bannerDescription').textContent = banner.description;
+  document.getElementById('bannerPosition').textContent = `${String(bannerIndex + 1).padStart(2, '0')} / ${String(banners.length).padStart(2, '0')}`;
+  bannerHero.dataset.theme = banner.theme;
+  bannerPagination.querySelectorAll('button').forEach((button, buttonIndex) => {
+    button.classList.toggle('active', buttonIndex === bannerIndex);
+    button.setAttribute('aria-current', String(buttonIndex === bannerIndex));
+  });
+  bannerLayers[nextLayer].classList.add('is-active');
+  bannerLayers[bannerLayer].classList.remove('is-active');
+  bannerLayers[nextLayer].setAttribute('aria-hidden', 'false');
+  bannerLayers[bannerLayer].setAttribute('aria-hidden', 'true');
+  bannerLayer = nextLayer;
+  scheduleBanner();
+}
+
+banners.forEach((banner, index) => {
+  const button = document.createElement('button');
+  button.type = 'button';
+  button.setAttribute('aria-label', `Show banner ${index + 1}: ${banner.label}`);
+  button.setAttribute('aria-current', String(index === 0));
+  button.className = index === 0 ? 'active' : '';
+  button.addEventListener('click', () => showBanner(index));
+  bannerPagination.append(button);
+});
+document.getElementById('bannerPrevious').addEventListener('click', () => showBanner(bannerIndex - 1));
+document.getElementById('bannerNext').addEventListener('click', () => showBanner(bannerIndex + 1));
+bannerHero.addEventListener('mouseenter', () => clearTimeout(bannerTimer));
+bannerHero.addEventListener('mouseleave', scheduleBanner);
+bannerHero.addEventListener('focusin', () => clearTimeout(bannerTimer));
+bannerHero.addEventListener('focusout', () => setTimeout(scheduleBanner, 0));
+document.addEventListener('visibilitychange', scheduleBanner);
+scheduleBanner();
+
 function saveSelection() {
   localStorage.setItem('tanee-selection', JSON.stringify([...selected]));
   updateSelection();
@@ -185,8 +255,6 @@ search.addEventListener('input', renderProducts);
 
 fetch('catalogue.json').then(response => { if (!response.ok) throw new Error('Catalogue unavailable'); return response.json(); }).then(data => {
   products = data;
-  document.getElementById('heroFront').src = imagePath(byId('aqua-purple') || products[0]);
-  document.getElementById('heroBack').src = imagePath(byId('ornate-maroon-teal') || products[1]);
   renderFilters(); updateSelection(); renderProducts();
   if (location.hash.startsWith('#product=')) {
     const product = byId(decodeURIComponent(location.hash.slice(9)));

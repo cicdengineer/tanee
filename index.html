@@ -21,18 +21,18 @@
   </header>
 
   <main id="top">
-    <section class="hero" aria-labelledby="hero-title">
+    <section class="hero banner-hero" aria-labelledby="hero-title" aria-roledescription="carousel" data-theme="light">
+      <div class="banner-slide is-active" aria-hidden="false"><img src="assets/banners/elegant-folds.webp" alt="Teal, maroon, magenta and mauve sarees folded on ivory" fetchpriority="high"></div>
+      <div class="banner-slide" aria-hidden="true"><img alt=""></div>
       <div class="hero-copy">
-        <span class="eyebrow"><span class="sparkle">✦</span> THE TANEE COLLECTION</span>
-        <h1 id="hero-title">A saree for<br><em>every story.</em></h1>
-        <p>Discover colour, craft and the little details that feel like you. Browse our designs, save your favourites, and enquire with us directly.</p>
+        <span class="eyebrow" id="bannerEyebrow"><span class="sparkle">✦</span> COLOUR IN EVERY FOLD</span>
+        <h1 id="hero-title">Beautiful from<br><em>every fold.</em></h1>
+        <p id="bannerDescription">Discover striking shades, graceful folds and borders that draw the eye.</p>
         <a class="primary-button" href="#collection">Explore the collection <span aria-hidden="true">↗</span></a>
-        <div class="hero-foot"><span class="line"></span><span>Find your next favourite</span></div>
       </div>
-      <div class="hero-art" aria-label="Featured Tanee sarees">
-        <div class="hero-image hero-image-back"><img id="heroBack" alt="Featured folded Tanee saree" fetchpriority="high"></div>
-        <div class="hero-image hero-image-front"><img id="heroFront" alt="Featured folded Tanee saree" fetchpriority="high"></div>
-        <div class="hero-stamp">CURATED<br>FOR YOU <span>✦</span></div>
+      <div class="banner-controls" aria-label="Banner slideshow controls">
+        <div class="banner-pagination" id="bannerPagination" aria-label="Choose a banner"></div>
+        <div class="banner-navigation"><button type="button" id="bannerPrevious" aria-label="Previous banner">←</button><span id="bannerPosition">01 / 05</span><button type="button" id="bannerNext" aria-label="Next banner">→</button></div>
       </div>
     </section>
 

@@ -2,6 +2,8 @@
 
 A static, responsive saree catalogue. Customers can browse 60 designs, inspect available views, save favourites, and send a prefilled enquiry to **+91 80733 24411** on WhatsApp.
 
+The homepage rotates through five banners supplied in `wallpapers/`. Smaller WebP copies in `assets/banners/` are served to visitors. The text and colour treatment change with each banner; the catalogue and WhatsApp selection work as before.
+
 ## Preview
 
 Run a local HTTP server in this directory, then open its local URL:
