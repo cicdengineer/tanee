@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#341f2a">
+  <meta name="description" content="Explore Tanee sarees. Save the designs you love and enquire directly on WhatsApp.">
+  <title>Tanee — Saree Catalogue</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="announcement">A collection to make every occasion your own <span>✦</span> Explore the catalogue below</div>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Tanee home">TANEE<span class="brand-dot">.</span><small>in</small></a>
+    <nav aria-label="Main navigation"><a href="#collection">The collection</a><a href="#how-it-works">How it works</a></nav>
+    <button class="header-selection" type="button" id="headerSelection" aria-label="Open selected designs">Selected <span id="headerCount">0</span></button>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="sparkle">✦</span> THE TANEE COLLECTION</span>
+        <h1 id="hero-title">A saree for<br><em>every story.</em></h1>
+        <p>Discover colour, craft and the little details that feel like you. Browse our designs, save your favourites, and enquire with us directly.</p>
+        <a class="primary-button" href="#collection">Explore the collection <span aria-hidden="true">↗</span></a>
+        <div class="hero-foot"><span class="line"></span><span>Find your next favourite</span></div>
+      </div>
+      <div class="hero-art" aria-label="Featured Tanee sarees">
+        <div class="hero-image hero-image-back"><img id="heroBack" alt="Featured folded Tanee saree" fetchpriority="high"></div>
+        <div class="hero-image hero-image-front"><img id="heroFront" alt="Featured folded Tanee saree" fetchpriority="high"></div>
+        <div class="hero-stamp">CURATED<br>FOR YOU <span>✦</span></div>
+      </div>
+    </section>
+
+    <section class="intro-strip" id="how-it-works" aria-label="How to enquire">
+      <div><span class="step-num">01</span><span>Explore the designs</span></div>
+      <span class="step-arrow" aria-hidden="true">→</span>
+      <div><span class="step-num">02</span><span>Save your favourites</span></div>
+      <span class="step-arrow" aria-hidden="true">→</span>
+      <div><span class="step-num">03</span><span>Send us a WhatsApp enquiry</span></div>
+    </section>
+
+    <section class="collection" id="collection" aria-labelledby="collection-title">
+      <div class="section-heading"><div><span class="eyebrow">BROWSE & DISCOVER</span><h2 id="collection-title">The collection<span class="title-accent">.</span></h2><p>Every design has a story. Find the one that speaks to you.</p></div><span class="collection-count" id="collectionCount"></span></div>
+      <div class="catalogue-tools"><label class="search-box"><span aria-hidden="true">⌕</span><span class="sr-only">Search by colour or design</span><input id="search" type="search" placeholder="Search colours or designs…" autocomplete="off"></label><div class="filters" id="filters" aria-label="Filter designs"></div></div>
+      <div class="product-grid" id="productGrid" aria-live="polite"></div>
+      <p class="empty-state" id="emptyState" hidden>No designs match your search. Try another colour or pattern.</p>
+    </section>
+
+    <section class="closing"><div><span class="eyebrow">A LITTLE HELP, WHENEVER YOU NEED IT</span><h2>Found a design you love?</h2><p>Save one or more sarees and send your selection to us on WhatsApp. We’ll help with the details.</p></div><button class="light-button" type="button" id="closingSelection">View my selection <span aria-hidden="true">↗</span></button></section>
+  </main>
+
+  <footer><a class="brand footer-brand" href="#top">TANEE<span class="brand-dot">.</span><small>in</small></a><p>Beautiful choices begin here.</p><a href="https://wa.me/918073324411" target="_blank" rel="noopener noreferrer">Chat with us on WhatsApp ↗</a></footer>
+
+  <button class="floating-selection" type="button" id="floatingSelection" hidden><span>View selection</span><span class="floating-count" id="floatingCount">0</span><span aria-hidden="true">↗</span></button>
+
+  <div class="overlay" id="detailOverlay" hidden><div class="scrim" data-close="detail"></div><section class="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detailTitle"><button class="icon-close" type="button" data-close="detail" aria-label="Close details">×</button><div class="detail-media"><img id="detailImage" alt=""><div class="detail-thumbs" id="detailThumbs"></div></div><div class="detail-copy"><span class="eyebrow">TANEE · SAREE COLLECTION</span><h2 id="detailTitle"></h2><p>Explore the available views of this design.</p><div class="detail-divider"></div><span class="detail-label">DESIGN CODE</span><strong id="detailCode"></strong><button class="primary-button detail-add" type="button" id="detailAdd"></button><p class="detail-note">Enquire on WhatsApp for price and availability.</p></div></section></div>
+
+  <div class="overlay" id="selectionOverlay" hidden><div class="scrim" data-close="selection"></div><section class="selection-panel" role="dialog" aria-modal="true" aria-labelledby="selectionTitle"><div class="panel-top"><div><span class="eyebrow">YOUR FAVOURITES</span><h2 id="selectionTitle">My selection <span id="selectionCount">(0)</span></h2></div><button class="icon-close" type="button" data-close="selection" aria-label="Close selection">×</button></div><div class="selection-items" id="selectionItems"></div><div class="panel-bottom"><p>Your selected designs will be listed in a prefilled WhatsApp message.</p><a class="primary-button whatsapp-button" id="whatsappLink" href="#" target="_blank" rel="noopener noreferrer">Send enquiry on WhatsApp <span aria-hidden="true">↗</span></a></div></section></div>
+</body>
+</html>

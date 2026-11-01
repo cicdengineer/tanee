@@ -1,0 +1,198 @@
+const productGrid = document.getElementById('productGrid');
+const search = document.getElementById('search');
+const filters = document.getElementById('filters');
+const selected = new Set(JSON.parse(localStorage.getItem('tanee-selection') || '[]'));
+const families = ['All', 'Ornate', 'Check', 'Twill', 'Diamond', 'Temple', 'Zigzag', 'Classic'];
+let products = [];
+let activeFamily = 'All';
+let activeProduct = null;
+let lastFocus = null;
+
+const byId = id => products.find(product => product.id === id);
+const imagePath = (product, view = 'folded') => product.images[view] || product.images.body || Object.values(product.images)[0];
+const designCode = product => `TANEE-${product.id.toUpperCase()}`;
+
+function saveSelection() {
+  localStorage.setItem('tanee-selection', JSON.stringify([...selected]));
+  updateSelection();
+  renderProducts();
+  if (!document.getElementById('selectionOverlay').hidden) renderSelection();
+  if (activeProduct) updateDetailButton();
+}
+
+function toggleSelection(id) {
+  selected.has(id) ? selected.delete(id) : selected.add(id);
+  saveSelection();
+}
+
+function updateSelection() {
+  const count = selected.size;
+  document.getElementById('headerCount').textContent = count;
+  document.getElementById('floatingCount').textContent = count;
+  document.getElementById('floatingSelection').hidden = count === 0;
+  document.getElementById('selectionCount').textContent = `(${count})`;
+}
+
+function renderFilters() {
+  filters.replaceChildren();
+  for (const family of families) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = `filter${activeFamily === family ? ' active' : ''}`;
+    button.textContent = family;
+    button.setAttribute('aria-pressed', String(activeFamily === family));
+    button.addEventListener('click', () => { activeFamily = family; renderFilters(); renderProducts(); });
+    filters.append(button);
+  }
+}
+
+function renderProducts() {
+  const query = search.value.trim().toLowerCase();
+  const visible = products.filter(product =>
+    (activeFamily === 'All' || product.family === activeFamily) &&
+    (product.name.toLowerCase().includes(query) || product.family.toLowerCase().includes(query))
+  );
+  document.getElementById('collectionCount').textContent = `${visible.length} designs`;
+  document.getElementById('emptyState').hidden = visible.length !== 0;
+  productGrid.replaceChildren();
+  for (const product of visible) {
+    const article = document.createElement('article');
+    article.className = 'product-card';
+    const photo = document.createElement('div');
+    photo.className = 'product-photo';
+    const img = document.createElement('img');
+    img.src = imagePath(product);
+    img.alt = `${product.name} Tanee saree, folded view`;
+    img.loading = 'lazy';
+    const open = document.createElement('button');
+    open.className = 'photo-open';
+    open.type = 'button';
+    open.setAttribute('aria-label', `View ${product.name} details`);
+    open.addEventListener('click', () => openDetail(product));
+    const quick = document.createElement('span');
+    quick.className = 'quick-view'; quick.textContent = 'View details ↗';
+    const save = document.createElement('button');
+    save.className = `save-button${selected.has(product.id) ? ' saved' : ''}`;
+    save.type = 'button';
+    save.textContent = selected.has(product.id) ? '♥' : '♡';
+    save.setAttribute('aria-label', `${selected.has(product.id) ? 'Remove' : 'Save'} ${product.name} ${selected.has(product.id) ? 'from' : 'to'} selection`);
+    save.setAttribute('aria-pressed', String(selected.has(product.id)));
+    save.addEventListener('click', () => toggleSelection(product.id));
+    photo.append(img, open, quick, save);
+    const info = document.createElement('div'); info.className = 'product-info';
+    const words = document.createElement('div');
+    const title = document.createElement('h3'); title.textContent = product.name;
+    const category = document.createElement('p'); category.textContent = `${product.family} collection`;
+    words.append(title, category);
+    const arrow = document.createElement('button'); arrow.type = 'button'; arrow.textContent = '↗';
+    arrow.setAttribute('aria-label', `View ${product.name} details`);
+    arrow.addEventListener('click', () => openDetail(product));
+    info.append(words, arrow); article.append(photo, info); productGrid.append(article);
+  }
+}
+
+function showOverlay(id) {
+  lastFocus = document.activeElement;
+  document.getElementById(id).hidden = false;
+  document.body.classList.add('modal-open');
+  document.getElementById(id).querySelector('.icon-close').focus();
+}
+function closeOverlay(id) {
+  document.getElementById(id).hidden = true;
+  document.body.classList.remove('modal-open');
+  activeProduct = null;
+  lastFocus?.focus();
+}
+
+function updateDetailButton() {
+  const button = document.getElementById('detailAdd');
+  button.textContent = selected.has(activeProduct.id) ? 'Remove from selection −' : 'Add to my selection +';
+  button.setAttribute('aria-pressed', String(selected.has(activeProduct.id)));
+}
+
+function openDetail(product) {
+  activeProduct = product;
+  document.getElementById('detailTitle').textContent = product.name;
+  document.querySelector('.detail-copy > p').textContent = `Explore ${Object.keys(product.images).length} available views of this design.`;
+  document.getElementById('detailCode').textContent = designCode(product);
+  const detailImage = document.getElementById('detailImage');
+  const thumbs = document.getElementById('detailThumbs');
+  thumbs.replaceChildren();
+  for (const [view, path] of Object.entries(product.images)) {
+    const button = document.createElement('button'); button.type = 'button';
+    button.setAttribute('aria-label', `Show ${view} view`);
+    const image = document.createElement('img'); image.src = path; image.alt = '';
+    button.append(image);
+    button.addEventListener('click', () => {
+      detailImage.src = path;
+      detailImage.alt = `${product.name} saree, ${view} view`;
+      thumbs.querySelectorAll('button').forEach(item => item.classList.remove('active'));
+      button.classList.add('active');
+    });
+    thumbs.append(button);
+  }
+  thumbs.firstElementChild?.click();
+  updateDetailButton();
+  showOverlay('detailOverlay');
+  history.replaceState(null, '', `#product=${encodeURIComponent(product.id)}`);
+}
+
+function renderSelection() {
+  const items = document.getElementById('selectionItems');
+  items.replaceChildren();
+  const chosen = [...selected].map(byId).filter(Boolean);
+  if (!chosen.length) {
+    const empty = document.createElement('p');
+    empty.className = 'selection-empty';
+    empty.textContent = 'Your selection is empty. Tap the heart on any design to save it here.';
+    items.append(empty);
+  }
+  for (const product of chosen) {
+    const row = document.createElement('div'); row.className = 'selection-item';
+    const image = document.createElement('img'); image.src = imagePath(product); image.alt = '';
+    const details = document.createElement('div');
+    const name = document.createElement('strong'); name.textContent = product.name;
+    const code = document.createElement('small'); code.textContent = designCode(product);
+    details.append(name, code);
+    const remove = document.createElement('button'); remove.type = 'button'; remove.textContent = '×';
+    remove.setAttribute('aria-label', `Remove ${product.name}`);
+    remove.addEventListener('click', () => toggleSelection(product.id));
+    row.append(image, details, remove); items.append(row);
+  }
+  const link = document.getElementById('whatsappLink');
+  const lines = chosen.map((product, index) => `${index + 1}. ${product.name} (${designCode(product)})`);
+  const message = `Hello Tanee, I'm interested in these sarees:\n\n${lines.join('\n')}\n\nPlease share price and availability. Thank you!`;
+  link.href = chosen.length ? `https://wa.me/918073324411?text=${encodeURIComponent(message)}` : '#';
+  link.classList.toggle('disabled', chosen.length === 0);
+  link.setAttribute('aria-disabled', String(chosen.length === 0));
+}
+
+function openSelection() { renderSelection(); showOverlay('selectionOverlay'); }
+
+document.querySelectorAll('#headerSelection,#floatingSelection,#closingSelection').forEach(button => button.addEventListener('click', openSelection));
+document.querySelectorAll('[data-close]').forEach(button => button.addEventListener('click', () => {
+  closeOverlay(button.dataset.close === 'detail' ? 'detailOverlay' : 'selectionOverlay');
+  if (location.hash.startsWith('#product=')) history.replaceState(null, '', '#collection');
+}));
+document.getElementById('detailAdd').addEventListener('click', () => toggleSelection(activeProduct.id));
+document.addEventListener('keydown', event => {
+  if (event.key === 'Escape') {
+    if (!document.getElementById('detailOverlay').hidden) closeOverlay('detailOverlay');
+    if (!document.getElementById('selectionOverlay').hidden) closeOverlay('selectionOverlay');
+  }
+});
+search.addEventListener('input', renderProducts);
+
+fetch('catalogue.json').then(response => { if (!response.ok) throw new Error('Catalogue unavailable'); return response.json(); }).then(data => {
+  products = data;
+  document.getElementById('heroFront').src = imagePath(byId('aqua-purple') || products[0]);
+  document.getElementById('heroBack').src = imagePath(byId('ornate-maroon-teal') || products[1]);
+  renderFilters(); updateSelection(); renderProducts();
+  if (location.hash.startsWith('#product=')) {
+    const product = byId(decodeURIComponent(location.hash.slice(9)));
+    if (product) openDetail(product);
+  }
+}).catch(() => {
+  document.getElementById('emptyState').hidden = false;
+  document.getElementById('emptyState').textContent = 'The catalogue could not load. Please refresh the page.';
+});
