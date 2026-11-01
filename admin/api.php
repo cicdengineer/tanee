@@ -4,7 +4,6 @@ declare(strict_types=1);
 // Writable content and the login configuration live beside public_html, outside Git deployments.
 const PRODUCT_VIEWS = ['folded', 'body', 'pallu', 'blouse'];
 const MAX_IMAGE_BYTES = 8388608;
-const SETUP_TOKEN_HASH = '786aa5dec82758e715f454d140974623693051431da1579e82ef9f648d356603';
 
 header('X-Content-Type-Options: nosniff');
 header('Referrer-Policy: same-origin');
@@ -132,29 +131,6 @@ function validateCatalogue(array $data): array {
         $banners[] = $clean;
     }
     return ['categories' => $categories, 'products' => $products, 'banners' => $banners];
-}
-
-if ($route === 'setup' && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    $secure = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
-        || ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https'
-        || (int)($_SERVER['SERVER_PORT'] ?? 0) === 443;
-    if (!$secure) respond(403, ['error' => 'HTTPS is required for setup.']);
-    $configFile = $dataDir . '/admin-config.php';
-    if (is_file($configFile)) respond(409, ['error' => 'Admin is already configured.']);
-    $body = input();
-    if (!is_string($body['token'] ?? null) || !hash_equals(SETUP_TOKEN_HASH, hash('sha256', $body['token']))) respond(403, ['error' => 'Invalid setup token.']);
-    $username = $body['username'] ?? null; $password = $body['password'] ?? null;
-    if (!is_string($username) || !preg_match('/^[a-zA-Z0-9_-]{3,50}$/', $username) || !is_string($password) || strlen($password) < 10 || strlen($password) > 1024) respond(422, ['error' => 'Invalid admin account.']);
-    if (!is_dir($dataDir) && !mkdir($dataDir, 0750, true)) respond(500, ['error' => 'Could not create private storage.']);
-    $salt = bin2hex(random_bytes(24)); $iterations = 600000;
-    $config = ['username' => $username, 'salt' => $salt, 'iterations' => $iterations, 'password_hash' => hash_pbkdf2('sha256', $password, $salt, $iterations, 64)];
-    $file = fopen($configFile, 'x');
-    if (!$file) respond(409, ['error' => 'Admin is already configured.']);
-    $content = "<?php\nreturn " . var_export($config, true) . ";\n";
-    $written = fwrite($file, $content); fclose($file);
-    if ($written !== strlen($content)) { unlink($configFile); respond(500, ['error' => 'Could not save admin configuration.']); }
-    chmod($configFile, 0600);
-    respond(200, ['ok' => true]);
 }
 
 if ($route === 'public' && $_SERVER['REQUEST_METHOD'] === 'GET') {
