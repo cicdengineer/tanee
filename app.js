@@ -2,7 +2,7 @@ const productGrid = document.getElementById('productGrid');
 const search = document.getElementById('search');
 const filters = document.getElementById('filters');
 const selected = new Set(JSON.parse(localStorage.getItem('tanee-selection') || '[]'));
-const families = ['All', 'Ornate', 'Check', 'Twill', 'Diamond', 'Temple', 'Zigzag', 'Classic'];
+let families = ['All'];
 let products = [];
 let activeFamily = 'All';
 let activeProduct = null;
@@ -11,8 +11,9 @@ let lastFocus = null;
 const byId = id => products.find(product => product.id === id);
 const imagePath = (product, view = 'folded') => product.images[view] || product.images.body || Object.values(product.images)[0];
 const designCode = product => `TANEE-${product.id.toUpperCase()}`;
+const priceLabel = product => product.price == null ? null : new Intl.NumberFormat('en-IN', {style:'currency', currency:'INR', maximumFractionDigits:2}).format(product.price);
 
-const banners = [
+let banners = [
   {label: 'Colour in every fold', first: 'Beautiful from', second: 'every fold.', description: 'Discover striking shades, graceful folds and borders that draw the eye.', image: 'assets/banners/elegant-folds.webp', alt: 'Teal, maroon, magenta and mauve sarees folded on ivory', theme: 'light'},
   {label: 'The black and gold edit', first: 'A statement in', second: 'black & gold.', description: 'A classic contrast with a luminous finish, made for a memorable entrance.', image: 'assets/banners/black-gold.webp', alt: 'Close view of a black saree with gold woven details', theme: 'dark'},
   {label: 'The contrast edit', first: 'Contrast that', second: 'captivates.', description: 'Charcoal and mustard meet in a bold pairing with a beautiful border.', image: 'assets/banners/charcoal-mustard.webp', alt: 'Charcoal and mustard saree with a metallic border', theme: 'light'},
@@ -64,15 +65,19 @@ async function showBanner(index) {
   scheduleBanner();
 }
 
-banners.forEach((banner, index) => {
-  const button = document.createElement('button');
-  button.type = 'button';
-  button.setAttribute('aria-label', `Show banner ${index + 1}: ${banner.label}`);
-  button.setAttribute('aria-current', String(index === 0));
-  button.className = index === 0 ? 'active' : '';
-  button.addEventListener('click', () => showBanner(index));
-  bannerPagination.append(button);
-});
+function buildBannerPagination() {
+  bannerPagination.replaceChildren();
+  banners.forEach((banner, index) => {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.setAttribute('aria-label', `Show banner ${index + 1}: ${banner.label}`);
+    button.setAttribute('aria-current', String(index === 0));
+    button.className = index === 0 ? 'active' : '';
+    button.addEventListener('click', () => showBanner(index));
+    bannerPagination.append(button);
+  });
+}
+buildBannerPagination();
 document.getElementById('bannerPrevious').addEventListener('click', () => showBanner(bannerIndex - 1));
 document.getElementById('bannerNext').addEventListener('click', () => showBanner(bannerIndex + 1));
 bannerHero.addEventListener('mouseenter', () => clearTimeout(bannerTimer));
@@ -154,6 +159,7 @@ function renderProducts() {
     const title = document.createElement('h3'); title.textContent = product.name;
     const category = document.createElement('p'); category.textContent = `${product.family} collection`;
     words.append(title, category);
+    if (priceLabel(product)) { const price = document.createElement('strong'); price.className = 'product-price'; price.textContent = priceLabel(product); words.append(price); }
     const arrow = document.createElement('button'); arrow.type = 'button'; arrow.textContent = '↗';
     arrow.setAttribute('aria-label', `View ${product.name} details`);
     arrow.addEventListener('click', () => openDetail(product));
@@ -185,6 +191,7 @@ function openDetail(product) {
   document.getElementById('detailTitle').textContent = product.name;
   document.querySelector('.detail-copy > p').textContent = `Explore ${Object.keys(product.images).length} available views of this design.`;
   document.getElementById('detailCode').textContent = designCode(product);
+  document.getElementById('detailPrice').textContent = priceLabel(product) || 'Ask us for the price';
   const detailImage = document.getElementById('detailImage');
   const thumbs = document.getElementById('detailThumbs');
   thumbs.replaceChildren();
@@ -230,7 +237,7 @@ function renderSelection() {
     row.append(image, details, remove); items.append(row);
   }
   const link = document.getElementById('whatsappLink');
-  const lines = chosen.map((product, index) => `${index + 1}. ${product.name} (${designCode(product)})`);
+  const lines = chosen.map((product, index) => `${index + 1}. ${product.name} (${designCode(product)})${priceLabel(product) ? ` — ${priceLabel(product)}` : ''}`);
   const message = `Hello Tanee, I'm interested in these sarees:\n\n${lines.join('\n')}\n\nPlease share price and availability. Thank you!`;
   link.href = chosen.length ? `https://wa.me/918073324411?text=${encodeURIComponent(message)}` : '#';
   link.classList.toggle('disabled', chosen.length === 0);
@@ -253,8 +260,22 @@ document.addEventListener('keydown', event => {
 });
 search.addEventListener('input', renderProducts);
 
-fetch('catalogue.json').then(response => { if (!response.ok) throw new Error('Catalogue unavailable'); return response.json(); }).then(data => {
-  products = data;
+async function loadCatalogue() {
+  const response = await fetch('admin/api.php?route=public', {cache:'no-store'});
+  let data;
+  if (response.ok && (response.headers.get('content-type') || '').includes('application/json')) data = await response.json();
+  else if (response.status === 404 || !(response.headers.get('content-type') || '').includes('application/json')) {
+    const fallback = await fetch('catalogue.json');
+    if (!fallback.ok) throw new Error('Catalogue unavailable');
+    data = await fallback.json();
+  } else throw new Error('Catalogue unavailable');
+  return data;
+}
+
+loadCatalogue().then(data => {
+  products = Array.isArray(data) ? data : data.products;
+  families = ['All', ...(Array.isArray(data) ? [...new Set(data.map(product => product.family))] : data.categories)];
+  if (Array.isArray(data.banners) && data.banners.length) { banners = data.banners; bannerIndex = 0; buildBannerPagination(); showBanner(0); }
   renderFilters(); updateSelection(); renderProducts();
   if (location.hash.startsWith('#product=')) {
     const product = byId(decodeURIComponent(location.hash.slice(9)));

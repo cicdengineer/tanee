@@ -1,0 +1,9 @@
+{
+  "banners": [
+    {"label":"Colour in every fold","first":"Beautiful from","second":"every fold.","description":"Discover striking shades, graceful folds and borders that draw the eye.","image":"assets/banners/elegant-folds.webp","alt":"Teal, maroon, magenta and mauve sarees folded on ivory","theme":"light"},
+    {"label":"The black and gold edit","first":"A statement in","second":"black & gold.","description":"A classic contrast with a luminous finish, made for a memorable entrance.","image":"assets/banners/black-gold.webp","alt":"Close view of a black saree with gold woven details","theme":"dark"},
+    {"label":"The contrast edit","first":"Contrast that","second":"captivates.","description":"Charcoal and mustard meet in a bold pairing with a beautiful border.","image":"assets/banners/charcoal-mustard.webp","alt":"Charcoal and mustard saree with a metallic border","theme":"light"},
+    {"label":"Colour stories","first":"Colour,","second":"beautifully paired.","description":"Teal and magenta bring fresh energy to a timeless drape.","image":"assets/banners/teal-magenta.webp","alt":"Teal and magenta sarees draped together on ivory","theme":"light"},
+    {"label":"Softly expressive","first":"Soft tones.","second":"Lasting impression.","description":"A quieter palette of sage and mauve, full of movement and detail.","image":"assets/banners/sage-mauve.webp","alt":"Sage and mauve sarees arranged in soft waves","theme":"light"}
+  ]
+}
