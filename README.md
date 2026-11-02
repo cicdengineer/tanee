@@ -18,7 +18,7 @@ The tool reads the password from standard input without echoing it. Transfer the
 
 For a local functional preview, run PHP with `TANEE_DATA_DIR` pointing to `.private/tanee-data` and serve the repository root. A plain static HTTP server can preview the storefront but cannot execute the admin API.
 
-The homepage rotates through five banners supplied in `wallpapers/`. Smaller WebP copies in `assets/banners/` are served to visitors. The collection supports category, search, price range, and ordering controls. The popup and WhatsApp selection show each design's SKU.
+The homepage rotates through five banners supplied in `wallpapers/`. Smaller WebP copies in `assets/banners/` are served to visitors. The collection supports category, search, and ordering controls. The popup and WhatsApp selection show each design's SKU.
 
 ## Preview
 

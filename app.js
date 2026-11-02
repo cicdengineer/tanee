@@ -123,13 +123,9 @@ function renderFilters() {
 
 function renderProducts() {
   const query = search.value.trim().toLowerCase();
-  const minPrice = document.getElementById('minPrice').value;
-  const maxPrice = document.getElementById('maxPrice').value;
   const visible = products.filter(product =>
     (activeFamily === 'All' || product.family === activeFamily) &&
-    (product.name.toLowerCase().includes(query) || product.family.toLowerCase().includes(query) || designCode(product).toLowerCase().includes(query)) &&
-    (minPrice === '' || (product.price != null && Number(product.price) >= Number(minPrice))) &&
-    (maxPrice === '' || (product.price != null && Number(product.price) <= Number(maxPrice)))
+    (product.name.toLowerCase().includes(query) || product.family.toLowerCase().includes(query) || designCode(product).toLowerCase().includes(query))
   );
   const sort = document.getElementById('sortProducts').value;
   if (sort === 'oldest') visible.reverse();
@@ -271,13 +267,7 @@ document.addEventListener('keydown', event => {
   }
 });
 search.addEventListener('input', renderProducts);
-for (const id of ['sortProducts', 'minPrice', 'maxPrice']) document.getElementById(id).addEventListener(id === 'sortProducts' ? 'change' : 'input', renderProducts);
-document.getElementById('clearRefine').addEventListener('click', () => {
-  document.getElementById('sortProducts').value = 'newest';
-  document.getElementById('minPrice').value = '';
-  document.getElementById('maxPrice').value = '';
-  renderProducts();
-});
+document.getElementById('sortProducts').addEventListener('change', renderProducts);
 
 async function loadCatalogue() {
   const response = await fetch('admin/api.php?route=public', {cache:'no-store'});
