@@ -5,6 +5,8 @@ declare(strict_types=1);
 const PRODUCT_VIEWS = ['folded', 'body', 'pallu', 'blouse'];
 const MAX_IMAGE_BYTES = 8388608;
 const BORDER_CATEGORIES = ['Mudra - Slim Border', 'Tarang - Medium Border', 'Virasat - Broad Border'];
+const FEATURED_CATEGORIES = ['Vaibhava', 'Aabharana', 'Saumya'];
+const PRICING_REVISION = 1;
 const LEGACY_CATEGORIES = ['Classic' => 'Tarang - Medium Border', 'Check' => 'Virasat - Broad Border', 'Diamond' => 'Mudra - Slim Border', 'Temple' => 'Virasat - Broad Border', 'Ornate' => 'Tarang - Medium Border', 'Twill' => 'Tarang - Medium Border', 'Zigzag' => 'Tarang - Medium Border'];
 
 header('X-Content-Type-Options: nosniff');
@@ -41,6 +43,8 @@ function catalogue(): array {
     foreach ($seedProducts as $product) if (isset($product['id'], $product['sku'])) $seedSkus[$product['id']] = $product['sku'];
     $seedFamilies = [];
     foreach ($seedProducts as $product) if (isset($product['id'], $product['family'])) $seedFamilies[$product['id']] = $product['family'];
+    $seedPrices = [];
+    foreach ($seedProducts as $product) if (isset($product['id'], $product['price']) && in_array($product['family'] ?? '', FEATURED_CATEGORIES, true)) $seedPrices[$product['id']] = $product['price'];
     $used = [];
     foreach ($decoded['products'] as $product) if (!empty($product['sku'])) $used[$product['sku']] = true;
     $reserved = [];
@@ -64,11 +68,17 @@ function catalogue(): array {
     foreach ($decoded['products'] as &$product) {
         $family = $product['family'] ?? '';
         if (array_key_exists($family, LEGACY_CATEGORIES)) $product['family'] = $seedFamilies[$product['id'] ?? ''] ?? LEGACY_CATEGORIES[$family];
+        if (($decoded['pricingRevision'] ?? 0) < PRICING_REVISION && array_key_exists($product['id'] ?? '', $seedPrices)) {
+            $product['family'] = $seedFamilies[$product['id']];
+            $product['price'] = $seedPrices[$product['id']];
+        }
     }
     unset($product);
+    $decoded['pricingRevision'] = PRICING_REVISION;
     $usedFamilies = array_unique(array_column($decoded['products'], 'family'));
-    $customCategories = array_values(array_filter($decoded['categories'] ?? [], fn($category) => !array_key_exists($category, LEGACY_CATEGORIES) && !in_array($category, BORDER_CATEGORIES, true)));
-    $decoded['categories'] = array_values(array_unique(array_merge(BORDER_CATEGORIES, $customCategories, $usedFamilies)));
+    $preferred = array_merge(FEATURED_CATEGORIES, BORDER_CATEGORIES);
+    $customCategories = array_values(array_filter($decoded['categories'] ?? [], fn($category) => !array_key_exists($category, LEGACY_CATEGORIES) && !in_array($category, $preferred, true)));
+    $decoded['categories'] = array_values(array_unique(array_merge(array_values(array_intersect($preferred, $usedFamilies)), $customCategories, $usedFamilies)));
     return $decoded;
 }
 
@@ -170,7 +180,7 @@ function validateCatalogue(array $data): array {
         $clean['theme'] = $banner['theme'];
         $banners[] = $clean;
     }
-    return ['categories' => $categories, 'products' => $products, 'banners' => $banners];
+    return ['categories' => $categories, 'products' => $products, 'banners' => $banners, 'pricingRevision' => PRICING_REVISION];
 }
 
 if ($route === 'public' && $_SERVER['REQUEST_METHOD'] === 'GET') {

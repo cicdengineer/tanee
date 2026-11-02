@@ -21,7 +21,7 @@ DEST.mkdir(parents=True, exist_ok=True)
 catalogue_file = ROOT / 'catalogue.json'
 existing = json.loads(catalogue_file.read_text(encoding='utf-8')) if catalogue_file.exists() else []
 existing_products = existing if isinstance(existing, list) else existing.get('products', [])
-families_by_id = {product['id']: product['family'] for product in existing_products}
+details_by_id = {product['id']: product for product in existing_products}
 products = []
 views = ('Folded', 'Body', 'Pallu', 'Blouse')
 
@@ -50,10 +50,14 @@ for folder in sorted(SOURCE.iterdir()):
             continue
         images[view.lower()] = f'assets/products/{target.name}'
     if images:
-        family = families_by_id.get(slug, 'Border Review')
+        previous = details_by_id.get(slug, {})
+        family = previous.get('family', 'Border Review')
         number = len(products) + 1
-        sku = f'SDM{(number - 1) // 99 + 1:02d}-{(number - 1) % 99 + 1:02d}'
-        products.append({'id': slug, 'sku': sku, 'name': name, 'family': family, 'images': images})
+        sku = previous.get('sku', f'SDM{(number - 1) // 99 + 1:02d}-{(number - 1) % 99 + 1:02d}')
+        product = {'id': slug, 'sku': sku, 'name': name, 'family': family, 'images': images}
+        if previous.get('price') is not None:
+            product['price'] = previous['price']
+        products.append(product)
 
 catalogue_file.write_text(json.dumps(products, indent=2), encoding='utf-8')
 print(f'Prepared {len(products)} designs and {sum(len(p["images"]) for p in products)} images.')

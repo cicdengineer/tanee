@@ -61,14 +61,15 @@
   {
     "id": "brown-gold-check",
     "name": "Brown Gold Check",
-    "family": "Virasat - Broad Border",
+    "family": "Vaibhava",
     "images": {
       "folded": "assets/products/brown-gold-check-folded.webp",
       "body": "assets/products/brown-gold-check-body.webp",
       "pallu": "assets/products/brown-gold-check-pallu.webp",
       "blouse": "assets/products/brown-gold-check-blouse.webp"
     },
-    "sku": "SDM01-06"
+    "sku": "SDM01-06",
+    "price": 1840
   },
   {
     "id": "complete",
@@ -95,38 +96,41 @@
   {
     "id": "diamond-charcoal-mustard",
     "name": "Diamond Charcoal Mustard",
-    "family": "Tarang - Medium Border",
+    "family": "Saumya",
     "images": {
       "folded": "assets/products/diamond-charcoal-mustard-folded.webp",
       "body": "assets/products/diamond-charcoal-mustard-body.webp",
       "pallu": "assets/products/diamond-charcoal-mustard-pallu.webp",
       "blouse": "assets/products/diamond-charcoal-mustard-blouse.webp"
     },
-    "sku": "SDM01-09"
+    "sku": "SDM01-09",
+    "price": 1390
   },
   {
     "id": "diamond-green-rust",
     "name": "Diamond Green Rust",
-    "family": "Tarang - Medium Border",
+    "family": "Saumya",
     "images": {
       "folded": "assets/products/diamond-green-rust-folded.webp",
       "body": "assets/products/diamond-green-rust-body.webp",
       "pallu": "assets/products/diamond-green-rust-pallu.webp",
       "blouse": "assets/products/diamond-green-rust-blouse.webp"
     },
-    "sku": "SDM01-10"
+    "sku": "SDM01-10",
+    "price": 1390
   },
   {
     "id": "diamond-peach-rose",
     "name": "Diamond Peach Rose",
-    "family": "Mudra - Slim Border",
+    "family": "Saumya",
     "images": {
       "folded": "assets/products/diamond-peach-rose-folded.webp",
       "body": "assets/products/diamond-peach-rose-body.webp",
       "pallu": "assets/products/diamond-peach-rose-pallu.webp",
       "blouse": "assets/products/diamond-peach-rose-blouse.webp"
     },
-    "sku": "SDM01-11"
+    "sku": "SDM01-11",
+    "price": 1390
   },
   {
     "id": "green-check",
@@ -155,14 +159,15 @@
   {
     "id": "green-pink",
     "name": "Green Pink",
-    "family": "Tarang - Medium Border",
+    "family": "Saumya",
     "images": {
       "folded": "assets/products/green-pink-folded.webp",
       "body": "assets/products/green-pink-body.webp",
       "pallu": "assets/products/green-pink-pallu.webp",
       "blouse": "assets/products/green-pink-blouse.webp"
     },
-    "sku": "SDM01-14"
+    "sku": "SDM01-14",
+    "price": 1390
   },
   {
     "id": "green-purple",
@@ -179,38 +184,41 @@
   {
     "id": "green-silver-elephant",
     "name": "Green Silver Elephant",
-    "family": "Virasat - Broad Border",
+    "family": "Vaibhava",
     "images": {
       "folded": "assets/products/green-silver-elephant-folded.webp",
       "body": "assets/products/green-silver-elephant-body.webp",
       "pallu": "assets/products/green-silver-elephant-pallu.webp",
       "blouse": "assets/products/green-silver-elephant-blouse.webp"
     },
-    "sku": "SDM01-16"
+    "sku": "SDM01-16",
+    "price": 1840
   },
   {
     "id": "lime-maroon-chevron",
     "name": "Lime Maroon Chevron",
-    "family": "Virasat - Broad Border",
+    "family": "Aabharana",
     "images": {
       "folded": "assets/products/lime-maroon-chevron-folded.webp",
       "body": "assets/products/lime-maroon-chevron-body.webp",
       "pallu": "assets/products/lime-maroon-chevron-pallu.webp",
       "blouse": "assets/products/lime-maroon-chevron-blouse.webp"
     },
-    "sku": "SDM01-17"
+    "sku": "SDM01-17",
+    "price": 1500
   },
   {
     "id": "lime-purple-bars",
     "name": "Lime Purple Bars",
-    "family": "Virasat - Broad Border",
+    "family": "Aabharana",
     "images": {
       "folded": "assets/products/lime-purple-bars-folded.webp",
       "body": "assets/products/lime-purple-bars-body.webp",
       "pallu": "assets/products/lime-purple-bars-pallu.webp",
       "blouse": "assets/products/lime-purple-bars-blouse.webp"
     },
-    "sku": "SDM01-18"
+    "sku": "SDM01-18",
+    "price": 1500
   },
   {
     "id": "lime-silver",
@@ -263,14 +271,15 @@
   {
     "id": "maroon-silver-check",
     "name": "Maroon Silver Check",
-    "family": "Virasat - Broad Border",
+    "family": "Vaibhava",
     "images": {
       "folded": "assets/products/maroon-silver-check-folded.webp",
       "body": "assets/products/maroon-silver-check-body.webp",
       "pallu": "assets/products/maroon-silver-check-pallu.webp",
       "blouse": "assets/products/maroon-silver-check-blouse.webp"
     },
-    "sku": "SDM01-23"
+    "sku": "SDM01-23",
+    "price": 1840
   },
   {
     "id": "mustard-blue",
@@ -561,14 +570,15 @@
   {
     "id": "teal-mauve-silver",
     "name": "Teal Mauve Silver",
-    "family": "Virasat - Broad Border",
+    "family": "Aabharana",
     "images": {
       "folded": "assets/products/teal-mauve-silver-folded.webp",
       "body": "assets/products/teal-mauve-silver-body.webp",
       "pallu": "assets/products/teal-mauve-silver-pallu.webp",
       "blouse": "assets/products/teal-mauve-silver-blouse.webp"
     },
-    "sku": "SDM01-48"
+    "sku": "SDM01-48",
+    "price": 1500
   },
   {
     "id": "teal-plum",

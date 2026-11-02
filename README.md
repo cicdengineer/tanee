@@ -22,6 +22,8 @@ The homepage rotates through five banners supplied in `wallpapers/`. Smaller Web
 
 The initial designs are grouped by visible border width: **Mudra - Slim Border**, **Tarang - Medium Border**, and **Virasat - Broad Border**. The API updates the older pattern-based categories in saved catalogues while preserving prices, design codes, and custom categories. New designs generated from image folders are marked `Border Review` until their border width is assessed in admin.
 
+Selected designs are grouped into the traditional collections **Vaibhava** (₹1,840), **Aabharana** (₹1,500), and **Saumya** (₹1,390). The API applies these assignments once to existing server-side catalogues, then preserves later admin edits. The image preparation tool keeps established categories, prices, and design codes when refreshing product images.
+
 ## Preview
 
 Run a local HTTP server in this directory, then open its local URL:
