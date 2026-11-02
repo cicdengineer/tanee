@@ -185,6 +185,8 @@ function validateCatalogue(array $data): array {
         if (!in_array($family, $categories, true)) respond(422, ['error' => 'Every product needs a valid category.']);
         $price = $product['price'] ?? null;
         if ($price !== null && (!is_numeric($price) || (float)$price < 0 || (float)$price > 10000000)) respond(422, ['error' => 'Invalid product price.']);
+        $qty = $product['qty'] ?? null;
+        if ($qty !== null && (!is_int($qty) || $qty < 0 || $qty > 1000000)) respond(422, ['error' => 'Quantity must be a whole number from 0 to 1000000.']);
         $images = $product['images'] ?? null;
         if (!is_array($images) || count($images) === 0) respond(422, ['error' => 'Every product needs an image.']);
         $cleanImages = [];
@@ -194,7 +196,7 @@ function validateCatalogue(array $data): array {
         }
         $ids[$id] = true;
         $skus[$sku] = true;
-        $products[] = ['id' => $id, 'sku' => $sku, 'name' => trim($name), 'family' => $family, 'price' => $price === null ? null : round((float)$price, 2), 'images' => $cleanImages];
+        $products[] = ['id' => $id, 'sku' => $sku, 'name' => trim($name), 'family' => $family, 'price' => $price === null ? null : round((float)$price, 2), 'qty' => $qty, 'images' => $cleanImages];
     }
     $banners = [];
     foreach ($data['banners'] as $banner) {
@@ -216,7 +218,12 @@ function validateCatalogue(array $data): array {
 }
 
 if ($route === 'public' && $_SERVER['REQUEST_METHOD'] === 'GET') {
-    respond(200, catalogue());
+    $data = catalogue();
+    $data['products'] = array_values(array_map(static function (array $product): array {
+        unset($product['qty']);
+        return $product;
+    }, array_filter($data['products'], static fn(array $product): bool => !isset($product['qty']) || $product['qty'] > 1)));
+    respond(200, $data);
 }
 
 if ($route === 'image' && $_SERVER['REQUEST_METHOD'] === 'GET') {

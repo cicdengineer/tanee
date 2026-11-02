@@ -57,7 +57,7 @@ function renderAll() {
     select.replaceChildren(...names.map(name => option(name, name || 'Keep current category')));
     if (names.includes(current)) select.value = current;
   }
-  renderProducts(); renderCategories(); renderBanners();
+  renderProducts(); renderOutOfStock(); renderCategories(); renderBanners();
 }
 
 function option(value, label = value) {
@@ -77,11 +77,32 @@ function renderProducts() {
     const image = document.createElement('img'); image.src = '../' + (product.images.folded || Object.values(product.images)[0]); image.alt = '';
     const details = document.createElement('div');
     const title = document.createElement('h3'); title.textContent = product.name;
-    const meta = document.createElement('p'); meta.textContent = `${product.sku || 'Design code missing'} · ${product.family}`;
+    const meta = document.createElement('p'); meta.textContent = `${product.sku || 'Design code missing'} · ${product.family} · Qty ${product.qty ?? 'not set'}${product.qty != null && product.qty <= 1 ? ' · Off site' : ''}`;
     details.append(title, meta);
     const price = document.createElement('strong'); price.textContent = money(product.price);
     const edit = document.createElement('button'); edit.className = 'secondary'; edit.textContent = 'Edit ↗'; edit.addEventListener('click', () => openEditor(product));
     row.append(image, details, price, edit); list.append(row);
+  }
+}
+
+function renderOutOfStock() {
+  const products = catalogue.products.filter(product => product.qty != null && product.qty <= 1);
+  $('outOfStockCount').textContent = products.length;
+  const list = $('outOfStockList'); list.replaceChildren();
+  if (!products.length) {
+    const empty = document.createElement('p'); empty.className = 'empty';
+    empty.textContent = 'No designs are out of stock.'; list.append(empty);
+  }
+  for (const product of products) {
+    const row = document.createElement('article'); row.className = 'product-row stock-row';
+    const image = document.createElement('img'); image.src = '../' + (product.images.folded || Object.values(product.images)[0]); image.alt = '';
+    const details = document.createElement('div');
+    const title = document.createElement('h3'); title.textContent = product.name;
+    const meta = document.createElement('p'); meta.textContent = `${product.sku} · ${product.family} · Qty ${product.qty} · Off site`;
+    details.append(title, meta);
+    const edit = document.createElement('button'); edit.className = 'secondary'; edit.textContent = 'Update Qty ↗';
+    edit.addEventListener('click', () => openEditor(product));
+    row.append(image, details, edit); list.append(row);
   }
 }
 
@@ -187,6 +208,7 @@ function openEditor(product = null) {
   $('productCategory').replaceChildren(...catalogue.categories.map(name => option(name)));
   $('productCategory').value = product?.family || catalogue.categories[0] || '';
   $('productPrice').value = product?.price ?? '';
+  $('productQty').value = product?.qty ?? '';
   $('deleteProduct').hidden = !product;
   renderImages(); $('productDialog').showModal();
 }
@@ -221,7 +243,7 @@ $('productForm').addEventListener('submit', event => {
   if (catalogue.products.some(product => product.sku === sku && product.id !== editingId)) return message('That design code already exists.', true);
   if (!editingId && catalogue.products.some(product => product.id === id)) return message('That internal link ID already exists.', true);
   if (!Object.keys(draftImages).length) return message('Add at least one image.', true);
-  const product = {id, sku, name, family:$('productCategory').value, price:$('productPrice').value === '' ? null : Number($('productPrice').value), images:{...draftImages}};
+  const product = {id, sku, name, family:$('productCategory').value, price:$('productPrice').value === '' ? null : Number($('productPrice').value), qty:$('productQty').value === '' ? null : Number($('productQty').value), images:{...draftImages}};
   if (editingId) catalogue.products[catalogue.products.findIndex(item => item.id === editingId)] = product;
   else catalogue.products.unshift(product);
   $('productDialog').close(); setDirty(); message(`${name} updated. Save to publish.`);
@@ -244,10 +266,11 @@ $('categoryForm').addEventListener('submit', event => {
 });
 
 $('bulkForm').addEventListener('submit', event => {
-  event.preventDefault(); const from = $('bulkFrom').value, to = $('bulkTo').value, price = $('bulkPrice').value;
-  if (!to && price === '') return message('Choose a new category or enter a price.', true);
+  event.preventDefault(); const from = $('bulkFrom').value, to = $('bulkTo').value, price = $('bulkPrice').value, qty = $('bulkQty').value;
+  if (!to && price === '' && qty === '') return message('Choose a new category, enter a price, or enter a quantity.', true);
   const matching = catalogue.products.filter(product => product.family === from);
-  for (const product of matching) { if (to) product.family = to; if (price !== '') product.price = Number(price); }
+  if (!matching.length) return message(`There are no designs in ${from}.`, true);
+  for (const product of matching) { if (to) product.family = to; if (price !== '') product.price = Number(price); if (qty !== '') product.qty = Number(qty); }
   setDirty(); message(`Updated ${matching.length} designs. Save to publish.`);
 });
 

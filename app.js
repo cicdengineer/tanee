@@ -282,8 +282,10 @@ async function loadCatalogue() {
 }
 
 loadCatalogue().then(data => {
-  products = Array.isArray(data) ? data : data.products;
-  const categoryNames = Array.isArray(data) ? [...new Set(data.map(product => product.family))] : data.categories;
+  products = (Array.isArray(data) ? data : data.products).filter(product => product.qty == null || product.qty > 1);
+  for (const id of selected) if (!products.some(product => product.id === id)) selected.delete(id);
+  localStorage.setItem('tanee-selection', JSON.stringify([...selected]));
+  const categoryNames = [...new Set(products.map(product => product.family))];
   const categoryOrder = ['Vaibhava', 'Aabharana', 'Saumya', 'Pallava', 'Shikha', 'Alankara', 'Mudra - Slim Border', 'Tarang - Medium Border', 'Virasat - Broad Border'];
   families = ['All', ...categoryOrder.filter(name => categoryNames.includes(name)), ...categoryNames.filter(name => !categoryOrder.includes(name))];
   if (Array.isArray(data.banners) && data.banners.length) { banners = data.banners; bannerIndex = 0; buildBannerPagination(); showBanner(0); }
