@@ -77,7 +77,7 @@ function renderProducts() {
     const image = document.createElement('img'); image.src = '../' + (product.images.folded || Object.values(product.images)[0]); image.alt = '';
     const details = document.createElement('div');
     const title = document.createElement('h3'); title.textContent = product.name;
-    const meta = document.createElement('p'); meta.textContent = `${product.sku || 'Design code missing'} · ${product.family} · Qty ${product.qty ?? 'not set'}${product.qty != null && product.qty <= 1 ? ' · Off site' : ''}`;
+    const meta = document.createElement('p'); meta.textContent = `${product.sku || 'Design code missing'} · ${product.family} · Qty ${product.qty ?? 'not set'}${product.qty === 0 ? ' · Off site' : ''}`;
     details.append(title, meta);
     const price = document.createElement('strong'); price.textContent = money(product.price);
     const edit = document.createElement('button'); edit.className = 'secondary'; edit.textContent = 'Edit ↗'; edit.addEventListener('click', () => openEditor(product));
@@ -86,7 +86,7 @@ function renderProducts() {
 }
 
 function renderOutOfStock() {
-  const products = catalogue.products.filter(product => product.qty != null && product.qty <= 1);
+  const products = catalogue.products.filter(product => product.qty === 0);
   $('outOfStockCount').textContent = products.length;
   const list = $('outOfStockList'); list.replaceChildren();
   if (!products.length) {

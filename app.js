@@ -282,7 +282,7 @@ async function loadCatalogue() {
 }
 
 loadCatalogue().then(data => {
-  products = (Array.isArray(data) ? data : data.products).filter(product => product.qty == null || product.qty > 1);
+  products = (Array.isArray(data) ? data : data.products).filter(product => product.qty == null || product.qty > 0);
   for (const id of selected) if (!products.some(product => product.id === id)) selected.delete(id);
   localStorage.setItem('tanee-selection', JSON.stringify([...selected]));
   const categoryNames = [...new Set(products.map(product => product.family))];

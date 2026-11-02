@@ -222,7 +222,7 @@ if ($route === 'public' && $_SERVER['REQUEST_METHOD'] === 'GET') {
     $data['products'] = array_values(array_map(static function (array $product): array {
         unset($product['qty']);
         return $product;
-    }, array_filter($data['products'], static fn(array $product): bool => !isset($product['qty']) || $product['qty'] > 1)));
+    }, array_filter($data['products'], static fn(array $product): bool => !isset($product['qty']) || $product['qty'] > 0)));
     respond(200, $data);
 }
 
