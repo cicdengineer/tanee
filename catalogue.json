@@ -2,14 +2,15 @@
   {
     "id": "aqua-purple",
     "name": "Aqua Purple",
-    "family": "Mudra - Slim Border",
+    "family": "Pallava",
     "images": {
       "folded": "assets/products/aqua-purple-folded.webp",
       "body": "assets/products/aqua-purple-body.webp",
       "pallu": "assets/products/aqua-purple-pallu.webp",
       "blouse": "assets/products/aqua-purple-blouse.webp"
     },
-    "sku": "SDM01-01"
+    "sku": "SDM02-01",
+    "price": 1450
   },
   {
     "id": "aqua-sage",
@@ -26,14 +27,15 @@
   {
     "id": "black-green",
     "name": "Black Green",
-    "family": "Tarang - Medium Border",
+    "family": "Pallava",
     "images": {
       "folded": "assets/products/black-green-folded.webp",
       "body": "assets/products/black-green-body.webp",
       "pallu": "assets/products/black-green-pallu.webp",
       "blouse": "assets/products/black-green-blouse.webp"
     },
-    "sku": "SDM01-03"
+    "sku": "SDM02-02",
+    "price": 1450
   },
   {
     "id": "black-silver-check",
@@ -50,13 +52,14 @@
   {
     "id": "blue-magenta",
     "name": "Blue Magenta",
-    "family": "Tarang - Medium Border",
+    "family": "Shikha",
     "images": {
       "folded": "assets/products/blue-magenta-folded.webp",
       "pallu": "assets/products/blue-magenta-pallu.webp",
       "blouse": "assets/products/blue-magenta-blouse.webp"
     },
-    "sku": "SDM01-05"
+    "sku": "SDM02-16",
+    "price": 1450
   },
   {
     "id": "brown-gold-check",
@@ -74,12 +77,13 @@
   {
     "id": "complete",
     "name": "Complete",
-    "family": "Tarang - Medium Border",
+    "family": "Pallava",
     "images": {
       "body": "assets/products/complete-body.webp",
       "blouse": "assets/products/complete-blouse.webp"
     },
-    "sku": "SDM01-07"
+    "sku": "SDM02-03",
+    "price": 1450
   },
   {
     "id": "cream-maroon-check",
@@ -135,14 +139,15 @@
   {
     "id": "green-check",
     "name": "Green Check",
-    "family": "Tarang - Medium Border",
+    "family": "Pallava",
     "images": {
       "folded": "assets/products/green-check-folded.webp",
       "body": "assets/products/green-check-body.webp",
       "pallu": "assets/products/green-check-pallu.webp",
       "blouse": "assets/products/green-check-blouse.webp"
     },
-    "sku": "SDM01-12"
+    "sku": "SDM02-04",
+    "price": 1450
   },
   {
     "id": "green-gold-check",
@@ -172,14 +177,15 @@
   {
     "id": "green-purple",
     "name": "Green Purple",
-    "family": "Tarang - Medium Border",
+    "family": "Pallava",
     "images": {
       "folded": "assets/products/green-purple-folded.webp",
       "body": "assets/products/green-purple-body.webp",
       "pallu": "assets/products/green-purple-pallu.webp",
       "blouse": "assets/products/green-purple-blouse.webp"
     },
-    "sku": "SDM01-15"
+    "sku": "SDM02-05",
+    "price": 1450
   },
   {
     "id": "green-silver-elephant",
@@ -235,14 +241,15 @@
   {
     "id": "magenta-darkgreen",
     "name": "Magenta DarkGreen",
-    "family": "Mudra - Slim Border",
+    "family": "Shikha",
     "images": {
       "folded": "assets/products/magenta-darkgreen-folded.webp",
       "body": "assets/products/magenta-darkgreen-body.webp",
       "pallu": "assets/products/magenta-darkgreen-pallu.webp",
       "blouse": "assets/products/magenta-darkgreen-blouse.webp"
     },
-    "sku": "SDM01-20"
+    "sku": "SDM02-17",
+    "price": 1450
   },
   {
     "id": "magenta-gold-check",
@@ -259,14 +266,15 @@
   {
     "id": "magenta-teal",
     "name": "Magenta Teal",
-    "family": "Mudra - Slim Border",
+    "family": "Shikha",
     "images": {
       "folded": "assets/products/magenta-teal-folded.webp",
       "body": "assets/products/magenta-teal-body.webp",
       "pallu": "assets/products/magenta-teal-pallu.webp",
       "blouse": "assets/products/magenta-teal-blouse.webp"
     },
-    "sku": "SDM01-22"
+    "sku": "SDM02-18",
+    "price": 1450
   },
   {
     "id": "maroon-silver-check",
@@ -284,26 +292,28 @@
   {
     "id": "mustard-blue",
     "name": "Mustard Blue",
-    "family": "Mudra - Slim Border",
+    "family": "Pallava",
     "images": {
       "folded": "assets/products/mustard-blue-folded.webp",
       "body": "assets/products/mustard-blue-body.webp",
       "pallu": "assets/products/mustard-blue-pallu.webp",
       "blouse": "assets/products/mustard-blue-blouse.webp"
     },
-    "sku": "SDM01-24"
+    "sku": "SDM02-06",
+    "price": 1450
   },
   {
     "id": "mustard-maroon",
     "name": "Mustard Maroon",
-    "family": "Mudra - Slim Border",
+    "family": "Pallava",
     "images": {
       "folded": "assets/products/mustard-maroon-folded.webp",
       "body": "assets/products/mustard-maroon-body.webp",
       "pallu": "assets/products/mustard-maroon-pallu.webp",
       "blouse": "assets/products/mustard-maroon-blouse.webp"
     },
-    "sku": "SDM01-25"
+    "sku": "SDM02-07",
+    "price": 1450
   },
   {
     "id": "navy-aqua-temple",
@@ -320,168 +330,182 @@
   {
     "id": "olive-green",
     "name": "Olive Green",
-    "family": "Tarang - Medium Border",
+    "family": "Pallava",
     "images": {
       "body": "assets/products/olive-green-body.webp",
       "blouse": "assets/products/olive-green-blouse.webp"
     },
-    "sku": "SDM01-27"
+    "sku": "SDM02-08",
+    "price": 1450
   },
   {
     "id": "ornate-blue-maroon",
     "name": "Ornate Blue Maroon",
-    "family": "Mudra - Slim Border",
+    "family": "Alankara",
     "images": {
       "folded": "assets/products/ornate-blue-maroon-folded.webp",
       "body": "assets/products/ornate-blue-maroon-body.webp",
       "pallu": "assets/products/ornate-blue-maroon-pallu.webp",
       "blouse": "assets/products/ornate-blue-maroon-blouse.webp"
     },
-    "sku": "SDM01-28"
+    "sku": "SDM02-20",
+    "price": 1450
   },
   {
     "id": "ornate-blue-pink",
     "name": "Ornate Blue Pink",
-    "family": "Tarang - Medium Border",
+    "family": "Alankara",
     "images": {
       "folded": "assets/products/ornate-blue-pink-folded.webp",
       "body": "assets/products/ornate-blue-pink-body.webp",
       "pallu": "assets/products/ornate-blue-pink-pallu.webp",
       "blouse": "assets/products/ornate-blue-pink-blouse.webp"
     },
-    "sku": "SDM01-29"
+    "sku": "SDM02-21",
+    "price": 1450
   },
   {
     "id": "ornate-chartreuse-purple",
     "name": "Ornate Chartreuse Purple",
-    "family": "Tarang - Medium Border",
+    "family": "Alankara",
     "images": {
       "folded": "assets/products/ornate-chartreuse-purple-folded.webp",
       "body": "assets/products/ornate-chartreuse-purple-body.webp",
       "pallu": "assets/products/ornate-chartreuse-purple-pallu.webp",
       "blouse": "assets/products/ornate-chartreuse-purple-blouse.webp"
     },
-    "sku": "SDM01-30"
+    "sku": "SDM02-22",
+    "price": 1450
   },
   {
     "id": "ornate-cobalt-red",
     "name": "Ornate Cobalt Red",
-    "family": "Tarang - Medium Border",
+    "family": "Alankara",
     "images": {
       "folded": "assets/products/ornate-cobalt-red-folded.webp",
       "body": "assets/products/ornate-cobalt-red-body.webp",
       "pallu": "assets/products/ornate-cobalt-red-pallu.webp",
       "blouse": "assets/products/ornate-cobalt-red-blouse.webp"
     },
-    "sku": "SDM01-31"
+    "sku": "SDM02-23",
+    "price": 1450
   },
   {
     "id": "ornate-green-pink",
     "name": "Ornate Green Pink",
-    "family": "Tarang - Medium Border",
+    "family": "Alankara",
     "images": {
       "folded": "assets/products/ornate-green-pink-folded.webp",
       "body": "assets/products/ornate-green-pink-body.webp",
       "pallu": "assets/products/ornate-green-pink-pallu.webp",
       "blouse": "assets/products/ornate-green-pink-blouse.webp"
     },
-    "sku": "SDM01-32"
+    "sku": "SDM02-24",
+    "price": 1450
   },
   {
     "id": "ornate-indigo",
     "name": "Ornate Indigo",
-    "family": "Tarang - Medium Border",
+    "family": "Alankara",
     "images": {
       "folded": "assets/products/ornate-indigo-folded.webp",
       "body": "assets/products/ornate-indigo-body.webp",
       "pallu": "assets/products/ornate-indigo-pallu.webp",
       "blouse": "assets/products/ornate-indigo-blouse.webp"
     },
-    "sku": "SDM01-33"
+    "sku": "SDM02-25",
+    "price": 1450
   },
   {
     "id": "ornate-maroon-mustard",
     "name": "Ornate Maroon Mustard",
-    "family": "Tarang - Medium Border",
+    "family": "Alankara",
     "images": {
       "folded": "assets/products/ornate-maroon-mustard-folded.webp",
       "body": "assets/products/ornate-maroon-mustard-body.webp",
       "pallu": "assets/products/ornate-maroon-mustard-pallu.webp",
       "blouse": "assets/products/ornate-maroon-mustard-blouse.webp"
     },
-    "sku": "SDM01-34"
+    "sku": "SDM02-26",
+    "price": 1450
   },
   {
     "id": "ornate-maroon-teal",
     "name": "Ornate Maroon Teal",
-    "family": "Tarang - Medium Border",
+    "family": "Alankara",
     "images": {
       "folded": "assets/products/ornate-maroon-teal-folded.webp",
       "body": "assets/products/ornate-maroon-teal-body.webp",
       "pallu": "assets/products/ornate-maroon-teal-pallu.webp",
       "blouse": "assets/products/ornate-maroon-teal-blouse.webp"
     },
-    "sku": "SDM01-35"
+    "sku": "SDM02-27",
+    "price": 1450
   },
   {
     "id": "ornate-mustard-red",
     "name": "Ornate Mustard Red",
-    "family": "Tarang - Medium Border",
+    "family": "Alankara",
     "images": {
       "folded": "assets/products/ornate-mustard-red-folded.webp",
       "body": "assets/products/ornate-mustard-red-body.webp",
       "pallu": "assets/products/ornate-mustard-red-pallu.webp",
       "blouse": "assets/products/ornate-mustard-red-blouse.webp"
     },
-    "sku": "SDM01-36"
+    "sku": "SDM02-28",
+    "price": 1450
   },
   {
     "id": "ornate-petrol-plum",
     "name": "Ornate Petrol Plum",
-    "family": "Tarang - Medium Border",
+    "family": "Alankara",
     "images": {
       "folded": "assets/products/ornate-petrol-plum-folded.webp",
       "body": "assets/products/ornate-petrol-plum-body.webp",
       "pallu": "assets/products/ornate-petrol-plum-pallu.webp",
       "blouse": "assets/products/ornate-petrol-plum-blouse.webp"
     },
-    "sku": "SDM01-37"
+    "sku": "SDM02-29",
+    "price": 1450
   },
   {
     "id": "ornate-teal-red",
     "name": "Ornate Teal Red",
-    "family": "Tarang - Medium Border",
+    "family": "Alankara",
     "images": {
       "folded": "assets/products/ornate-teal-red-folded.webp",
       "body": "assets/products/ornate-teal-red-body.webp",
       "pallu": "assets/products/ornate-teal-red-pallu.webp",
       "blouse": "assets/products/ornate-teal-red-blouse.webp"
     },
-    "sku": "SDM01-38"
+    "sku": "SDM02-30",
+    "price": 1450
   },
   {
     "id": "pink-blue",
     "name": "Pink Blue",
-    "family": "Mudra - Slim Border",
+    "family": "Pallava",
     "images": {
       "folded": "assets/products/pink-blue-folded.webp",
       "body": "assets/products/pink-blue-body.webp",
       "pallu": "assets/products/pink-blue-pallu.webp",
       "blouse": "assets/products/pink-blue-blouse.webp"
     },
-    "sku": "SDM01-39"
+    "sku": "SDM02-09",
+    "price": 1450
   },
   {
     "id": "pink-mustard",
     "name": "Pink Mustard",
-    "family": "Mudra - Slim Border",
+    "family": "Pallava",
     "images": {
       "folded": "assets/products/pink-mustard-folded.webp",
       "body": "assets/products/pink-mustard-body.webp",
       "pallu": "assets/products/pink-mustard-pallu.webp",
       "blouse": "assets/products/pink-mustard-blouse.webp"
     },
-    "sku": "SDM01-40"
+    "sku": "SDM02-10",
+    "price": 1450
   },
   {
     "id": "pink-purple-temple",
@@ -510,38 +534,41 @@
   {
     "id": "red-green",
     "name": "Red Green",
-    "family": "Mudra - Slim Border",
+    "family": "Pallava",
     "images": {
       "folded": "assets/products/red-green-folded.webp",
       "body": "assets/products/red-green-body.webp",
       "pallu": "assets/products/red-green-pallu.webp",
       "blouse": "assets/products/red-green-blouse.webp"
     },
-    "sku": "SDM01-43"
+    "sku": "SDM02-11",
+    "price": 1450
   },
   {
     "id": "red-olive",
     "name": "Red Olive",
-    "family": "Mudra - Slim Border",
+    "family": "Pallava",
     "images": {
       "folded": "assets/products/red-olive-folded.webp",
       "body": "assets/products/red-olive-body.webp",
       "pallu": "assets/products/red-olive-pallu.webp",
       "blouse": "assets/products/red-olive-blouse.webp"
     },
-    "sku": "SDM01-44"
+    "sku": "SDM02-12",
+    "price": 1450
   },
   {
     "id": "royalblue-check",
     "name": "RoyalBlue Check",
-    "family": "Tarang - Medium Border",
+    "family": "Pallava",
     "images": {
       "folded": "assets/products/royalblue-check-folded.webp",
       "body": "assets/products/royalblue-check-body.webp",
       "pallu": "assets/products/royalblue-check-pallu.webp",
       "blouse": "assets/products/royalblue-check-blouse.webp"
     },
-    "sku": "SDM01-45"
+    "sku": "SDM02-13",
+    "price": 1450
   },
   {
     "id": "sage-maroon-check",
@@ -558,14 +585,15 @@
   {
     "id": "teal-maroon",
     "name": "Teal Maroon",
-    "family": "Mudra - Slim Border",
+    "family": "Shikha",
     "images": {
       "folded": "assets/products/teal-maroon-folded.webp",
       "body": "assets/products/teal-maroon-body.webp",
       "pallu": "assets/products/teal-maroon-pallu.webp",
       "blouse": "assets/products/teal-maroon-blouse.webp"
     },
-    "sku": "SDM01-47"
+    "sku": "SDM02-19",
+    "price": 1450
   },
   {
     "id": "teal-mauve-silver",
@@ -679,26 +707,28 @@
   {
     "id": "violet-check",
     "name": "Violet Check",
-    "family": "Tarang - Medium Border",
+    "family": "Pallava",
     "images": {
       "folded": "assets/products/violet-check-folded.webp",
       "body": "assets/products/violet-check-body.webp",
       "pallu": "assets/products/violet-check-pallu.webp",
       "blouse": "assets/products/violet-check-blouse.webp"
     },
-    "sku": "SDM01-57"
+    "sku": "SDM02-14",
+    "price": 1450
   },
   {
     "id": "yellow-lilac",
     "name": "Yellow Lilac",
-    "family": "Mudra - Slim Border",
+    "family": "Pallava",
     "images": {
       "folded": "assets/products/yellow-lilac-folded.webp",
       "body": "assets/products/yellow-lilac-body.webp",
       "pallu": "assets/products/yellow-lilac-pallu.webp",
       "blouse": "assets/products/yellow-lilac-blouse.webp"
     },
-    "sku": "SDM01-58"
+    "sku": "SDM02-15",
+    "price": 1450
   },
   {
     "id": "zigzag-black-pink",

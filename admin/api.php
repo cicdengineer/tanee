@@ -6,7 +6,8 @@ const PRODUCT_VIEWS = ['folded', 'body', 'pallu', 'blouse'];
 const MAX_IMAGE_BYTES = 8388608;
 const BORDER_CATEGORIES = ['Mudra - Slim Border', 'Tarang - Medium Border', 'Virasat - Broad Border'];
 const FEATURED_CATEGORIES = ['Vaibhava', 'Aabharana', 'Saumya'];
-const PRICING_REVISION = 1;
+const SDM02_CATEGORIES = ['Pallava', 'Shikha', 'Alankara'];
+const PRICING_REVISION = 2;
 const LEGACY_CATEGORIES = ['Classic' => 'Tarang - Medium Border', 'Check' => 'Virasat - Broad Border', 'Diamond' => 'Mudra - Slim Border', 'Temple' => 'Virasat - Broad Border', 'Ornate' => 'Tarang - Medium Border', 'Twill' => 'Tarang - Medium Border', 'Zigzag' => 'Tarang - Medium Border'];
 
 header('X-Content-Type-Options: nosniff');
@@ -44,7 +45,7 @@ function catalogue(): array {
     $seedFamilies = [];
     foreach ($seedProducts as $product) if (isset($product['id'], $product['family'])) $seedFamilies[$product['id']] = $product['family'];
     $seedPrices = [];
-    foreach ($seedProducts as $product) if (isset($product['id'], $product['price']) && in_array($product['family'] ?? '', FEATURED_CATEGORIES, true)) $seedPrices[$product['id']] = $product['price'];
+    foreach ($seedProducts as $product) if (isset($product['id'], $product['price'])) $seedPrices[$product['id']] = $product['price'];
     $used = [];
     foreach ($decoded['products'] as $product) if (!empty($product['sku'])) $used[$product['sku']] = true;
     $reserved = [];
@@ -65,18 +66,49 @@ function catalogue(): array {
         $used[$sku] = true;
     }
     unset($product);
+    $previousRevision = (int)($decoded['pricingRevision'] ?? 0);
     foreach ($decoded['products'] as &$product) {
         $family = $product['family'] ?? '';
         if (array_key_exists($family, LEGACY_CATEGORIES)) $product['family'] = $seedFamilies[$product['id'] ?? ''] ?? LEGACY_CATEGORIES[$family];
-        if (($decoded['pricingRevision'] ?? 0) < PRICING_REVISION && array_key_exists($product['id'] ?? '', $seedPrices)) {
+        $id = $product['id'] ?? '';
+        $newCollection = in_array($seedFamilies[$id] ?? '', SDM02_CATEGORIES, true);
+        if ((($previousRevision < 1) || ($previousRevision < 2 && $newCollection)) && array_key_exists($id, $seedPrices)) {
             $product['family'] = $seedFamilies[$product['id']];
             $product['price'] = $seedPrices[$product['id']];
         }
     }
     unset($product);
+    if ($previousRevision < 2) {
+        $occupied = [];
+        $reserved = [];
+        foreach ($decoded['products'] as $product) {
+            $id = $product['id'] ?? '';
+            if (!in_array($seedFamilies[$id] ?? '', SDM02_CATEGORIES, true)) $occupied[$product['sku']] = true;
+        }
+        foreach ($decoded['products'] as $product) {
+            $id = $product['id'] ?? '';
+            if (in_array($seedFamilies[$id] ?? '', SDM02_CATEGORIES, true) && !isset($occupied[$seedSkus[$id] ?? ''])) $reserved[$seedSkus[$id]] = true;
+        }
+        foreach ($decoded['products'] as &$product) {
+            $id = $product['id'] ?? '';
+            if (!in_array($seedFamilies[$id] ?? '', SDM02_CATEGORIES, true)) continue;
+            $code = $seedSkus[$id];
+            if (isset($occupied[$code])) {
+                for ($number = 1; $number <= 99; $number++) {
+                    $candidate = sprintf('SDM02-%02d', $number);
+                    if (!isset($occupied[$candidate]) && !isset($reserved[$candidate])) { $code = $candidate; break; }
+                }
+            }
+            if (isset($occupied[$code])) respond(409, ['error' => 'No unused SDM02 design code is available.']);
+            $product['sku'] = $code;
+            $occupied[$code] = true;
+            unset($reserved[$code]);
+        }
+        unset($product);
+    }
     $decoded['pricingRevision'] = PRICING_REVISION;
     $usedFamilies = array_unique(array_column($decoded['products'], 'family'));
-    $preferred = array_merge(FEATURED_CATEGORIES, BORDER_CATEGORIES);
+    $preferred = array_merge(FEATURED_CATEGORIES, SDM02_CATEGORIES, BORDER_CATEGORIES);
     $customCategories = array_values(array_filter($decoded['categories'] ?? [], fn($category) => !array_key_exists($category, LEGACY_CATEGORIES) && !in_array($category, $preferred, true)));
     $decoded['categories'] = array_values(array_unique(array_merge(array_values(array_intersect($preferred, $usedFamilies)), $customCategories, $usedFamilies)));
     return $decoded;

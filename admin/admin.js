@@ -5,7 +5,12 @@ const views = ['folded', 'body', 'pallu', 'blouse'];
 const skuFor = number => `SDM${String(Math.floor((number - 1) / 99) + 1).padStart(2, '0')}-${String((number - 1) % 99 + 1).padStart(2, '0')}`;
 function nextSku() {
   const used = new Set(catalogue.products.map(product => product.sku));
-  for (let number = 1; number <= 9801; number++) if (!used.has(skuFor(number))) return skuFor(number);
+  const highest = Math.max(0, ...catalogue.products.map(product => {
+    const match = /^SDM(\d{2})-(\d{2})$/.exec(product.sku || '');
+    return match ? (Number(match[1]) - 1) * 99 + Number(match[2]) : 0;
+  }));
+  for (let number = highest + 1; number <= 9801; number++) if (!used.has(skuFor(number))) return skuFor(number);
+  for (let number = 1; number <= highest; number++) if (!used.has(skuFor(number))) return skuFor(number);
   return '';
 }
 let csrf = null;

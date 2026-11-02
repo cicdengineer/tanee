@@ -24,6 +24,8 @@ The initial designs are grouped by visible border width: **Mudra - Slim Border**
 
 Selected designs are grouped into the traditional collections **Vaibhava** (₹1,840), **Aabharana** (₹1,500), and **Saumya** (₹1,390). The API applies these assignments once to existing server-side catalogues, then preserves later admin edits. The image preparation tool keeps established categories, prices, and design codes when refreshing product images.
 
+Three further border motifs are grouped as **Pallava** (single zari band), **Shikha** (paired pointed motifs), and **Alankara** (ornate woven motif). Their 30 colourways are priced at ₹1,450 each and assigned `SDM02-01` through `SDM02-30` design codes. The API applies these changes once to saved server-side catalogues, then preserves later admin edits.
+
 ## Preview
 
 Run a local HTTP server in this directory, then open its local URL:
