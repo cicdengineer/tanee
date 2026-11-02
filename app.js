@@ -283,7 +283,9 @@ async function loadCatalogue() {
 
 loadCatalogue().then(data => {
   products = Array.isArray(data) ? data : data.products;
-  families = ['All', ...(Array.isArray(data) ? [...new Set(data.map(product => product.family))] : data.categories)];
+  const categoryNames = Array.isArray(data) ? [...new Set(data.map(product => product.family))] : data.categories;
+  const borderOrder = ['Mudra - Slim Border', 'Tarang - Medium Border', 'Virasat - Broad Border'];
+  families = ['All', ...borderOrder.filter(name => categoryNames.includes(name)), ...categoryNames.filter(name => !borderOrder.includes(name))];
   if (Array.isArray(data.banners) && data.banners.length) { banners = data.banners; bannerIndex = 0; buildBannerPagination(); showBanner(0); }
   renderFilters(); updateSelection(); renderProducts();
   if (location.hash.startsWith('#product=')) {

@@ -4,6 +4,8 @@ declare(strict_types=1);
 // Writable content and the login configuration live beside public_html, outside Git deployments.
 const PRODUCT_VIEWS = ['folded', 'body', 'pallu', 'blouse'];
 const MAX_IMAGE_BYTES = 8388608;
+const BORDER_CATEGORIES = ['Mudra - Slim Border', 'Tarang - Medium Border', 'Virasat - Broad Border'];
+const LEGACY_CATEGORIES = ['Classic' => 'Tarang - Medium Border', 'Check' => 'Virasat - Broad Border', 'Diamond' => 'Mudra - Slim Border', 'Temple' => 'Virasat - Broad Border', 'Ornate' => 'Tarang - Medium Border', 'Twill' => 'Tarang - Medium Border', 'Zigzag' => 'Tarang - Medium Border'];
 
 header('X-Content-Type-Options: nosniff');
 header('Referrer-Policy: same-origin');
@@ -32,11 +34,13 @@ function catalogue(): array {
         $content = json_decode((string)file_get_contents($contentFile), true);
         $decoded = ['categories' => $categories, 'products' => $decoded, 'banners' => $content['banners'] ?? []];
     }
-    // Older server-side catalogues have no SKU; preserve seeded product assignments.
+    // Bring older server-side catalogues forward without discarding saved prices or codes.
     $seed = json_decode((string)file_get_contents($sourceFile), true);
     $seedProducts = array_is_list($seed) ? $seed : ($seed['products'] ?? []);
     $seedSkus = [];
     foreach ($seedProducts as $product) if (isset($product['id'], $product['sku'])) $seedSkus[$product['id']] = $product['sku'];
+    $seedFamilies = [];
+    foreach ($seedProducts as $product) if (isset($product['id'], $product['family'])) $seedFamilies[$product['id']] = $product['family'];
     $used = [];
     foreach ($decoded['products'] as $product) if (!empty($product['sku'])) $used[$product['sku']] = true;
     $reserved = [];
@@ -57,6 +61,14 @@ function catalogue(): array {
         $used[$sku] = true;
     }
     unset($product);
+    foreach ($decoded['products'] as &$product) {
+        $family = $product['family'] ?? '';
+        if (array_key_exists($family, LEGACY_CATEGORIES)) $product['family'] = $seedFamilies[$product['id'] ?? ''] ?? LEGACY_CATEGORIES[$family];
+    }
+    unset($product);
+    $usedFamilies = array_unique(array_column($decoded['products'], 'family'));
+    $customCategories = array_values(array_filter($decoded['categories'] ?? [], fn($category) => !array_key_exists($category, LEGACY_CATEGORIES) && !in_array($category, BORDER_CATEGORIES, true)));
+    $decoded['categories'] = array_values(array_unique(array_merge(BORDER_CATEGORIES, $customCategories, $usedFamilies)));
     return $decoded;
 }
 

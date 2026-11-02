@@ -2,7 +2,7 @@
   {
     "id": "aqua-purple",
     "name": "Aqua Purple",
-    "family": "Classic",
+    "family": "Mudra - Slim Border",
     "images": {
       "folded": "assets/products/aqua-purple-folded.webp",
       "body": "assets/products/aqua-purple-body.webp",
@@ -14,7 +14,7 @@
   {
     "id": "aqua-sage",
     "name": "Aqua Sage",
-    "family": "Classic",
+    "family": "Virasat - Broad Border",
     "images": {
       "folded": "assets/products/aqua-sage-folded.webp",
       "body": "assets/products/aqua-sage-body.webp",
@@ -26,7 +26,7 @@
   {
     "id": "black-green",
     "name": "Black Green",
-    "family": "Classic",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/black-green-folded.webp",
       "body": "assets/products/black-green-body.webp",
@@ -38,7 +38,7 @@
   {
     "id": "black-silver-check",
     "name": "Black Silver Check",
-    "family": "Check",
+    "family": "Virasat - Broad Border",
     "images": {
       "folded": "assets/products/black-silver-check-folded.webp",
       "body": "assets/products/black-silver-check-body.webp",
@@ -50,7 +50,7 @@
   {
     "id": "blue-magenta",
     "name": "Blue Magenta",
-    "family": "Classic",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/blue-magenta-folded.webp",
       "pallu": "assets/products/blue-magenta-pallu.webp",
@@ -61,7 +61,7 @@
   {
     "id": "brown-gold-check",
     "name": "Brown Gold Check",
-    "family": "Check",
+    "family": "Virasat - Broad Border",
     "images": {
       "folded": "assets/products/brown-gold-check-folded.webp",
       "body": "assets/products/brown-gold-check-body.webp",
@@ -73,7 +73,7 @@
   {
     "id": "complete",
     "name": "Complete",
-    "family": "Classic",
+    "family": "Tarang - Medium Border",
     "images": {
       "body": "assets/products/complete-body.webp",
       "blouse": "assets/products/complete-blouse.webp"
@@ -83,7 +83,7 @@
   {
     "id": "cream-maroon-check",
     "name": "Cream Maroon Check",
-    "family": "Check",
+    "family": "Virasat - Broad Border",
     "images": {
       "folded": "assets/products/cream-maroon-check-folded.webp",
       "body": "assets/products/cream-maroon-check-body.webp",
@@ -95,7 +95,7 @@
   {
     "id": "diamond-charcoal-mustard",
     "name": "Diamond Charcoal Mustard",
-    "family": "Diamond",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/diamond-charcoal-mustard-folded.webp",
       "body": "assets/products/diamond-charcoal-mustard-body.webp",
@@ -107,7 +107,7 @@
   {
     "id": "diamond-green-rust",
     "name": "Diamond Green Rust",
-    "family": "Diamond",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/diamond-green-rust-folded.webp",
       "body": "assets/products/diamond-green-rust-body.webp",
@@ -119,7 +119,7 @@
   {
     "id": "diamond-peach-rose",
     "name": "Diamond Peach Rose",
-    "family": "Diamond",
+    "family": "Mudra - Slim Border",
     "images": {
       "folded": "assets/products/diamond-peach-rose-folded.webp",
       "body": "assets/products/diamond-peach-rose-body.webp",
@@ -131,7 +131,7 @@
   {
     "id": "green-check",
     "name": "Green Check",
-    "family": "Check",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/green-check-folded.webp",
       "body": "assets/products/green-check-body.webp",
@@ -143,7 +143,7 @@
   {
     "id": "green-gold-check",
     "name": "Green Gold Check",
-    "family": "Check",
+    "family": "Virasat - Broad Border",
     "images": {
       "folded": "assets/products/green-gold-check-folded.webp",
       "body": "assets/products/green-gold-check-body.webp",
@@ -155,7 +155,7 @@
   {
     "id": "green-pink",
     "name": "Green Pink",
-    "family": "Classic",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/green-pink-folded.webp",
       "body": "assets/products/green-pink-body.webp",
@@ -167,7 +167,7 @@
   {
     "id": "green-purple",
     "name": "Green Purple",
-    "family": "Classic",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/green-purple-folded.webp",
       "body": "assets/products/green-purple-body.webp",
@@ -179,7 +179,7 @@
   {
     "id": "green-silver-elephant",
     "name": "Green Silver Elephant",
-    "family": "Classic",
+    "family": "Virasat - Broad Border",
     "images": {
       "folded": "assets/products/green-silver-elephant-folded.webp",
       "body": "assets/products/green-silver-elephant-body.webp",
@@ -191,7 +191,7 @@
   {
     "id": "lime-maroon-chevron",
     "name": "Lime Maroon Chevron",
-    "family": "Classic",
+    "family": "Virasat - Broad Border",
     "images": {
       "folded": "assets/products/lime-maroon-chevron-folded.webp",
       "body": "assets/products/lime-maroon-chevron-body.webp",
@@ -203,7 +203,7 @@
   {
     "id": "lime-purple-bars",
     "name": "Lime Purple Bars",
-    "family": "Classic",
+    "family": "Virasat - Broad Border",
     "images": {
       "folded": "assets/products/lime-purple-bars-folded.webp",
       "body": "assets/products/lime-purple-bars-body.webp",
@@ -215,7 +215,7 @@
   {
     "id": "lime-silver",
     "name": "Lime Silver",
-    "family": "Classic",
+    "family": "Virasat - Broad Border",
     "images": {
       "folded": "assets/products/lime-silver-folded.webp",
       "body": "assets/products/lime-silver-body.webp",
@@ -227,7 +227,7 @@
   {
     "id": "magenta-darkgreen",
     "name": "Magenta DarkGreen",
-    "family": "Classic",
+    "family": "Mudra - Slim Border",
     "images": {
       "folded": "assets/products/magenta-darkgreen-folded.webp",
       "body": "assets/products/magenta-darkgreen-body.webp",
@@ -239,7 +239,7 @@
   {
     "id": "magenta-gold-check",
     "name": "Magenta Gold Check",
-    "family": "Check",
+    "family": "Virasat - Broad Border",
     "images": {
       "folded": "assets/products/magenta-gold-check-folded.webp",
       "body": "assets/products/magenta-gold-check-body.webp",
@@ -251,7 +251,7 @@
   {
     "id": "magenta-teal",
     "name": "Magenta Teal",
-    "family": "Classic",
+    "family": "Mudra - Slim Border",
     "images": {
       "folded": "assets/products/magenta-teal-folded.webp",
       "body": "assets/products/magenta-teal-body.webp",
@@ -263,7 +263,7 @@
   {
     "id": "maroon-silver-check",
     "name": "Maroon Silver Check",
-    "family": "Check",
+    "family": "Virasat - Broad Border",
     "images": {
       "folded": "assets/products/maroon-silver-check-folded.webp",
       "body": "assets/products/maroon-silver-check-body.webp",
@@ -275,7 +275,7 @@
   {
     "id": "mustard-blue",
     "name": "Mustard Blue",
-    "family": "Classic",
+    "family": "Mudra - Slim Border",
     "images": {
       "folded": "assets/products/mustard-blue-folded.webp",
       "body": "assets/products/mustard-blue-body.webp",
@@ -287,7 +287,7 @@
   {
     "id": "mustard-maroon",
     "name": "Mustard Maroon",
-    "family": "Classic",
+    "family": "Mudra - Slim Border",
     "images": {
       "folded": "assets/products/mustard-maroon-folded.webp",
       "body": "assets/products/mustard-maroon-body.webp",
@@ -299,7 +299,7 @@
   {
     "id": "navy-aqua-temple",
     "name": "Navy Aqua Temple",
-    "family": "Temple",
+    "family": "Virasat - Broad Border",
     "images": {
       "folded": "assets/products/navy-aqua-temple-folded.webp",
       "body": "assets/products/navy-aqua-temple-body.webp",
@@ -311,7 +311,7 @@
   {
     "id": "olive-green",
     "name": "Olive Green",
-    "family": "Classic",
+    "family": "Tarang - Medium Border",
     "images": {
       "body": "assets/products/olive-green-body.webp",
       "blouse": "assets/products/olive-green-blouse.webp"
@@ -321,7 +321,7 @@
   {
     "id": "ornate-blue-maroon",
     "name": "Ornate Blue Maroon",
-    "family": "Ornate",
+    "family": "Mudra - Slim Border",
     "images": {
       "folded": "assets/products/ornate-blue-maroon-folded.webp",
       "body": "assets/products/ornate-blue-maroon-body.webp",
@@ -333,7 +333,7 @@
   {
     "id": "ornate-blue-pink",
     "name": "Ornate Blue Pink",
-    "family": "Ornate",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/ornate-blue-pink-folded.webp",
       "body": "assets/products/ornate-blue-pink-body.webp",
@@ -345,7 +345,7 @@
   {
     "id": "ornate-chartreuse-purple",
     "name": "Ornate Chartreuse Purple",
-    "family": "Ornate",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/ornate-chartreuse-purple-folded.webp",
       "body": "assets/products/ornate-chartreuse-purple-body.webp",
@@ -357,7 +357,7 @@
   {
     "id": "ornate-cobalt-red",
     "name": "Ornate Cobalt Red",
-    "family": "Ornate",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/ornate-cobalt-red-folded.webp",
       "body": "assets/products/ornate-cobalt-red-body.webp",
@@ -369,7 +369,7 @@
   {
     "id": "ornate-green-pink",
     "name": "Ornate Green Pink",
-    "family": "Ornate",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/ornate-green-pink-folded.webp",
       "body": "assets/products/ornate-green-pink-body.webp",
@@ -381,7 +381,7 @@
   {
     "id": "ornate-indigo",
     "name": "Ornate Indigo",
-    "family": "Ornate",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/ornate-indigo-folded.webp",
       "body": "assets/products/ornate-indigo-body.webp",
@@ -393,7 +393,7 @@
   {
     "id": "ornate-maroon-mustard",
     "name": "Ornate Maroon Mustard",
-    "family": "Ornate",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/ornate-maroon-mustard-folded.webp",
       "body": "assets/products/ornate-maroon-mustard-body.webp",
@@ -405,7 +405,7 @@
   {
     "id": "ornate-maroon-teal",
     "name": "Ornate Maroon Teal",
-    "family": "Ornate",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/ornate-maroon-teal-folded.webp",
       "body": "assets/products/ornate-maroon-teal-body.webp",
@@ -417,7 +417,7 @@
   {
     "id": "ornate-mustard-red",
     "name": "Ornate Mustard Red",
-    "family": "Ornate",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/ornate-mustard-red-folded.webp",
       "body": "assets/products/ornate-mustard-red-body.webp",
@@ -429,7 +429,7 @@
   {
     "id": "ornate-petrol-plum",
     "name": "Ornate Petrol Plum",
-    "family": "Ornate",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/ornate-petrol-plum-folded.webp",
       "body": "assets/products/ornate-petrol-plum-body.webp",
@@ -441,7 +441,7 @@
   {
     "id": "ornate-teal-red",
     "name": "Ornate Teal Red",
-    "family": "Ornate",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/ornate-teal-red-folded.webp",
       "body": "assets/products/ornate-teal-red-body.webp",
@@ -453,7 +453,7 @@
   {
     "id": "pink-blue",
     "name": "Pink Blue",
-    "family": "Classic",
+    "family": "Mudra - Slim Border",
     "images": {
       "folded": "assets/products/pink-blue-folded.webp",
       "body": "assets/products/pink-blue-body.webp",
@@ -465,7 +465,7 @@
   {
     "id": "pink-mustard",
     "name": "Pink Mustard",
-    "family": "Classic",
+    "family": "Mudra - Slim Border",
     "images": {
       "folded": "assets/products/pink-mustard-folded.webp",
       "body": "assets/products/pink-mustard-body.webp",
@@ -477,7 +477,7 @@
   {
     "id": "pink-purple-temple",
     "name": "Pink Purple Temple",
-    "family": "Temple",
+    "family": "Virasat - Broad Border",
     "images": {
       "folded": "assets/products/pink-purple-temple-folded.webp",
       "body": "assets/products/pink-purple-temple-body.webp",
@@ -489,7 +489,7 @@
   {
     "id": "purple-silver-elephant",
     "name": "Purple Silver Elephant",
-    "family": "Classic",
+    "family": "Virasat - Broad Border",
     "images": {
       "folded": "assets/products/purple-silver-elephant-folded.webp",
       "body": "assets/products/purple-silver-elephant-body.webp",
@@ -501,7 +501,7 @@
   {
     "id": "red-green",
     "name": "Red Green",
-    "family": "Classic",
+    "family": "Mudra - Slim Border",
     "images": {
       "folded": "assets/products/red-green-folded.webp",
       "body": "assets/products/red-green-body.webp",
@@ -513,7 +513,7 @@
   {
     "id": "red-olive",
     "name": "Red Olive",
-    "family": "Classic",
+    "family": "Mudra - Slim Border",
     "images": {
       "folded": "assets/products/red-olive-folded.webp",
       "body": "assets/products/red-olive-body.webp",
@@ -525,7 +525,7 @@
   {
     "id": "royalblue-check",
     "name": "RoyalBlue Check",
-    "family": "Check",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/royalblue-check-folded.webp",
       "body": "assets/products/royalblue-check-body.webp",
@@ -537,7 +537,7 @@
   {
     "id": "sage-maroon-check",
     "name": "Sage Maroon Check",
-    "family": "Check",
+    "family": "Virasat - Broad Border",
     "images": {
       "folded": "assets/products/sage-maroon-check-folded.webp",
       "body": "assets/products/sage-maroon-check-body.webp",
@@ -549,7 +549,7 @@
   {
     "id": "teal-maroon",
     "name": "Teal Maroon",
-    "family": "Classic",
+    "family": "Mudra - Slim Border",
     "images": {
       "folded": "assets/products/teal-maroon-folded.webp",
       "body": "assets/products/teal-maroon-body.webp",
@@ -561,7 +561,7 @@
   {
     "id": "teal-mauve-silver",
     "name": "Teal Mauve Silver",
-    "family": "Classic",
+    "family": "Virasat - Broad Border",
     "images": {
       "folded": "assets/products/teal-mauve-silver-folded.webp",
       "body": "assets/products/teal-mauve-silver-body.webp",
@@ -573,7 +573,7 @@
   {
     "id": "teal-plum",
     "name": "Teal Plum",
-    "family": "Classic",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/teal-plum-folded.webp",
       "body": "assets/products/teal-plum-body.webp",
@@ -585,7 +585,7 @@
   {
     "id": "teal-silver-check",
     "name": "Teal Silver Check",
-    "family": "Check",
+    "family": "Virasat - Broad Border",
     "images": {
       "folded": "assets/products/teal-silver-check-folded.webp",
       "body": "assets/products/teal-silver-check-body.webp",
@@ -597,7 +597,7 @@
   {
     "id": "twill-black-gold",
     "name": "Twill Black Gold",
-    "family": "Twill",
+    "family": "Virasat - Broad Border",
     "images": {
       "folded": "assets/products/twill-black-gold-folded.webp",
       "body": "assets/products/twill-black-gold-body.webp",
@@ -609,7 +609,7 @@
   {
     "id": "twill-magenta-charcoal",
     "name": "Twill Magenta Charcoal",
-    "family": "Twill",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/twill-magenta-charcoal-folded.webp",
       "body": "assets/products/twill-magenta-charcoal-body.webp",
@@ -621,7 +621,7 @@
   {
     "id": "twill-mauve-maroon",
     "name": "Twill Mauve Maroon",
-    "family": "Twill",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/twill-mauve-maroon-folded.webp",
       "body": "assets/products/twill-mauve-maroon-body.webp",
@@ -633,7 +633,7 @@
   {
     "id": "twill-purple-pink",
     "name": "Twill Purple Pink",
-    "family": "Twill",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/twill-purple-pink-folded.webp",
       "body": "assets/products/twill-purple-pink-body.webp",
@@ -645,7 +645,7 @@
   {
     "id": "twill-royalblue-maroon",
     "name": "Twill RoyalBlue Maroon",
-    "family": "Twill",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/twill-royalblue-maroon-folded.webp",
       "body": "assets/products/twill-royalblue-maroon-body.webp",
@@ -657,7 +657,7 @@
   {
     "id": "twill-sage-rose",
     "name": "Twill Sage Rose",
-    "family": "Twill",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/twill-sage-rose-folded.webp",
       "body": "assets/products/twill-sage-rose-body.webp",
@@ -669,7 +669,7 @@
   {
     "id": "violet-check",
     "name": "Violet Check",
-    "family": "Check",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/violet-check-folded.webp",
       "body": "assets/products/violet-check-body.webp",
@@ -681,7 +681,7 @@
   {
     "id": "yellow-lilac",
     "name": "Yellow Lilac",
-    "family": "Classic",
+    "family": "Mudra - Slim Border",
     "images": {
       "folded": "assets/products/yellow-lilac-folded.webp",
       "body": "assets/products/yellow-lilac-body.webp",
@@ -693,7 +693,7 @@
   {
     "id": "zigzag-black-pink",
     "name": "Zigzag Black Pink",
-    "family": "Zigzag",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/zigzag-black-pink-folded.webp",
       "body": "assets/products/zigzag-black-pink-body.webp",
@@ -705,7 +705,7 @@
   {
     "id": "zigzag-green-pink",
     "name": "Zigzag Green Pink",
-    "family": "Zigzag",
+    "family": "Tarang - Medium Border",
     "images": {
       "folded": "assets/products/zigzag-green-pink-folded.webp",
       "body": "assets/products/zigzag-green-pink-body.webp",

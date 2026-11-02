@@ -20,6 +20,8 @@ For a local functional preview, run PHP with `TANEE_DATA_DIR` pointing to `.priv
 
 The homepage rotates through five banners supplied in `wallpapers/`. Smaller WebP copies in `assets/banners/` are served to visitors. The collection supports category, search, and ordering controls. The popup and WhatsApp selection show the design code for each product.
 
+The initial designs are grouped by visible border width: **Mudra - Slim Border**, **Tarang - Medium Border**, and **Virasat - Broad Border**. The API updates the older pattern-based categories in saved catalogues while preserving prices, design codes, and custom categories. New designs generated from image folders are marked `Border Review` until their border width is assessed in admin.
+
 ## Preview
 
 Run a local HTTP server in this directory, then open its local URL:
