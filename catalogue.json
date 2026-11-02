@@ -9,7 +9,7 @@
       "pallu": "assets/products/aqua-purple-pallu.webp",
       "blouse": "assets/products/aqua-purple-blouse.webp"
     },
-    "sku": "SDM02-01",
+    "sku": "SDM02-16",
     "price": 1450
   },
   {
@@ -34,7 +34,7 @@
       "pallu": "assets/products/black-green-pallu.webp",
       "blouse": "assets/products/black-green-blouse.webp"
     },
-    "sku": "SDM02-02",
+    "sku": "SDM02-17",
     "price": 1450
   },
   {
@@ -58,7 +58,7 @@
       "pallu": "assets/products/blue-magenta-pallu.webp",
       "blouse": "assets/products/blue-magenta-blouse.webp"
     },
-    "sku": "SDM02-16",
+    "sku": "SDM02-12",
     "price": 1450
   },
   {
@@ -82,7 +82,7 @@
       "body": "assets/products/complete-body.webp",
       "blouse": "assets/products/complete-blouse.webp"
     },
-    "sku": "SDM02-03",
+    "sku": "SDM02-18",
     "price": 1450
   },
   {
@@ -146,7 +146,7 @@
       "pallu": "assets/products/green-check-pallu.webp",
       "blouse": "assets/products/green-check-blouse.webp"
     },
-    "sku": "SDM02-04",
+    "sku": "SDM02-19",
     "price": 1450
   },
   {
@@ -184,7 +184,7 @@
       "pallu": "assets/products/green-purple-pallu.webp",
       "blouse": "assets/products/green-purple-blouse.webp"
     },
-    "sku": "SDM02-05",
+    "sku": "SDM02-20",
     "price": 1450
   },
   {
@@ -248,7 +248,7 @@
       "pallu": "assets/products/magenta-darkgreen-pallu.webp",
       "blouse": "assets/products/magenta-darkgreen-blouse.webp"
     },
-    "sku": "SDM02-17",
+    "sku": "SDM02-13",
     "price": 1450
   },
   {
@@ -273,7 +273,7 @@
       "pallu": "assets/products/magenta-teal-pallu.webp",
       "blouse": "assets/products/magenta-teal-blouse.webp"
     },
-    "sku": "SDM02-18",
+    "sku": "SDM02-14",
     "price": 1450
   },
   {
@@ -299,7 +299,7 @@
       "pallu": "assets/products/mustard-blue-pallu.webp",
       "blouse": "assets/products/mustard-blue-blouse.webp"
     },
-    "sku": "SDM02-06",
+    "sku": "SDM02-21",
     "price": 1450
   },
   {
@@ -312,7 +312,7 @@
       "pallu": "assets/products/mustard-maroon-pallu.webp",
       "blouse": "assets/products/mustard-maroon-blouse.webp"
     },
-    "sku": "SDM02-07",
+    "sku": "SDM02-22",
     "price": 1450
   },
   {
@@ -335,7 +335,7 @@
       "body": "assets/products/olive-green-body.webp",
       "blouse": "assets/products/olive-green-blouse.webp"
     },
-    "sku": "SDM02-08",
+    "sku": "SDM02-23",
     "price": 1450
   },
   {
@@ -348,7 +348,7 @@
       "pallu": "assets/products/ornate-blue-maroon-pallu.webp",
       "blouse": "assets/products/ornate-blue-maroon-blouse.webp"
     },
-    "sku": "SDM02-20",
+    "sku": "SDM02-01",
     "price": 1450
   },
   {
@@ -361,7 +361,7 @@
       "pallu": "assets/products/ornate-blue-pink-pallu.webp",
       "blouse": "assets/products/ornate-blue-pink-blouse.webp"
     },
-    "sku": "SDM02-21",
+    "sku": "SDM02-02",
     "price": 1450
   },
   {
@@ -374,7 +374,7 @@
       "pallu": "assets/products/ornate-chartreuse-purple-pallu.webp",
       "blouse": "assets/products/ornate-chartreuse-purple-blouse.webp"
     },
-    "sku": "SDM02-22",
+    "sku": "SDM02-03",
     "price": 1450
   },
   {
@@ -387,7 +387,7 @@
       "pallu": "assets/products/ornate-cobalt-red-pallu.webp",
       "blouse": "assets/products/ornate-cobalt-red-blouse.webp"
     },
-    "sku": "SDM02-23",
+    "sku": "SDM02-04",
     "price": 1450
   },
   {
@@ -400,7 +400,7 @@
       "pallu": "assets/products/ornate-green-pink-pallu.webp",
       "blouse": "assets/products/ornate-green-pink-blouse.webp"
     },
-    "sku": "SDM02-24",
+    "sku": "SDM02-05",
     "price": 1450
   },
   {
@@ -413,7 +413,7 @@
       "pallu": "assets/products/ornate-indigo-pallu.webp",
       "blouse": "assets/products/ornate-indigo-blouse.webp"
     },
-    "sku": "SDM02-25",
+    "sku": "SDM02-06",
     "price": 1450
   },
   {
@@ -426,7 +426,7 @@
       "pallu": "assets/products/ornate-maroon-mustard-pallu.webp",
       "blouse": "assets/products/ornate-maroon-mustard-blouse.webp"
     },
-    "sku": "SDM02-26",
+    "sku": "SDM02-07",
     "price": 1450
   },
   {
@@ -439,7 +439,7 @@
       "pallu": "assets/products/ornate-maroon-teal-pallu.webp",
       "blouse": "assets/products/ornate-maroon-teal-blouse.webp"
     },
-    "sku": "SDM02-27",
+    "sku": "SDM02-08",
     "price": 1450
   },
   {
@@ -452,7 +452,7 @@
       "pallu": "assets/products/ornate-mustard-red-pallu.webp",
       "blouse": "assets/products/ornate-mustard-red-blouse.webp"
     },
-    "sku": "SDM02-28",
+    "sku": "SDM02-09",
     "price": 1450
   },
   {
@@ -465,7 +465,7 @@
       "pallu": "assets/products/ornate-petrol-plum-pallu.webp",
       "blouse": "assets/products/ornate-petrol-plum-blouse.webp"
     },
-    "sku": "SDM02-29",
+    "sku": "SDM02-10",
     "price": 1450
   },
   {
@@ -478,7 +478,7 @@
       "pallu": "assets/products/ornate-teal-red-pallu.webp",
       "blouse": "assets/products/ornate-teal-red-blouse.webp"
     },
-    "sku": "SDM02-30",
+    "sku": "SDM02-11",
     "price": 1450
   },
   {
@@ -491,7 +491,7 @@
       "pallu": "assets/products/pink-blue-pallu.webp",
       "blouse": "assets/products/pink-blue-blouse.webp"
     },
-    "sku": "SDM02-09",
+    "sku": "SDM02-24",
     "price": 1450
   },
   {
@@ -504,7 +504,7 @@
       "pallu": "assets/products/pink-mustard-pallu.webp",
       "blouse": "assets/products/pink-mustard-blouse.webp"
     },
-    "sku": "SDM02-10",
+    "sku": "SDM02-25",
     "price": 1450
   },
   {
@@ -541,7 +541,7 @@
       "pallu": "assets/products/red-green-pallu.webp",
       "blouse": "assets/products/red-green-blouse.webp"
     },
-    "sku": "SDM02-11",
+    "sku": "SDM02-26",
     "price": 1450
   },
   {
@@ -554,7 +554,7 @@
       "pallu": "assets/products/red-olive-pallu.webp",
       "blouse": "assets/products/red-olive-blouse.webp"
     },
-    "sku": "SDM02-12",
+    "sku": "SDM02-27",
     "price": 1450
   },
   {
@@ -567,7 +567,7 @@
       "pallu": "assets/products/royalblue-check-pallu.webp",
       "blouse": "assets/products/royalblue-check-blouse.webp"
     },
-    "sku": "SDM02-13",
+    "sku": "SDM02-28",
     "price": 1450
   },
   {
@@ -592,7 +592,7 @@
       "pallu": "assets/products/teal-maroon-pallu.webp",
       "blouse": "assets/products/teal-maroon-blouse.webp"
     },
-    "sku": "SDM02-19",
+    "sku": "SDM02-15",
     "price": 1450
   },
   {
@@ -714,7 +714,7 @@
       "pallu": "assets/products/violet-check-pallu.webp",
       "blouse": "assets/products/violet-check-blouse.webp"
     },
-    "sku": "SDM02-14",
+    "sku": "SDM02-29",
     "price": 1450
   },
   {
@@ -727,7 +727,7 @@
       "pallu": "assets/products/yellow-lilac-pallu.webp",
       "blouse": "assets/products/yellow-lilac-blouse.webp"
     },
-    "sku": "SDM02-15",
+    "sku": "SDM02-30",
     "price": 1450
   },
   {
