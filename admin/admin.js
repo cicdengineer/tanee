@@ -77,7 +77,7 @@ function renderProducts() {
     const image = document.createElement('img'); image.src = '../' + (product.images.folded || Object.values(product.images)[0]); image.alt = '';
     const details = document.createElement('div');
     const title = document.createElement('h3'); title.textContent = product.name;
-    const meta = document.createElement('p'); meta.textContent = `${product.sku || 'Design code missing'} · ${product.family} · Qty ${product.qty ?? 'not set'}${product.qty === 0 ? ' · Off site' : ''}`;
+    const meta = document.createElement('p'); meta.textContent = `${product.sku || 'Design code missing'} · ${product.family} · Qty ${product.qty ?? 'not set'} · ${product.hidden === true ? 'Off site' : 'On site'}`;
     details.append(title, meta);
     const price = document.createElement('strong'); price.textContent = money(product.price);
     const edit = document.createElement('button'); edit.className = 'secondary'; edit.textContent = 'Edit ↗'; edit.addEventListener('click', () => openEditor(product));
@@ -98,11 +98,18 @@ function renderOutOfStock() {
     const image = document.createElement('img'); image.src = '../' + (product.images.folded || Object.values(product.images)[0]); image.alt = '';
     const details = document.createElement('div');
     const title = document.createElement('h3'); title.textContent = product.name;
-    const meta = document.createElement('p'); meta.textContent = `${product.sku} · ${product.family} · Qty ${product.qty} · Off site`;
+    const meta = document.createElement('p'); meta.textContent = `${product.sku} · ${product.family} · Qty ${product.qty} · ${product.hidden === true ? 'Off site' : 'On site'}`;
     details.append(title, meta);
     const edit = document.createElement('button'); edit.className = 'secondary'; edit.textContent = 'Update Qty ↗';
     edit.addEventListener('click', () => openEditor(product));
-    row.append(image, details, edit); list.append(row);
+    const visibility = document.createElement('button'); visibility.className = 'secondary';
+    visibility.textContent = product.hidden === true ? 'Show on website' : 'Remove from website';
+    visibility.addEventListener('click', () => {
+      product.hidden = product.hidden !== true;
+      setDirty(); message(`${product.name} will be ${product.hidden ? 'removed from' : 'shown on'} the website after you save.`);
+    });
+    const actions = document.createElement('div'); actions.className = 'stock-actions'; actions.append(edit, visibility);
+    row.append(image, details, actions); list.append(row);
   }
 }
 
@@ -209,6 +216,7 @@ function openEditor(product = null) {
   $('productCategory').value = product?.family || catalogue.categories[0] || '';
   $('productPrice').value = product?.price ?? '';
   $('productQty').value = product?.qty ?? '';
+  $('productVisibility').value = product?.hidden === true ? 'hidden' : 'visible';
   $('deleteProduct').hidden = !product;
   renderImages(); $('productDialog').showModal();
 }
@@ -243,7 +251,7 @@ $('productForm').addEventListener('submit', event => {
   if (catalogue.products.some(product => product.sku === sku && product.id !== editingId)) return message('That design code already exists.', true);
   if (!editingId && catalogue.products.some(product => product.id === id)) return message('That internal link ID already exists.', true);
   if (!Object.keys(draftImages).length) return message('Add at least one image.', true);
-  const product = {id, sku, name, family:$('productCategory').value, price:$('productPrice').value === '' ? null : Number($('productPrice').value), qty:$('productQty').value === '' ? null : Number($('productQty').value), images:{...draftImages}};
+  const product = {id, sku, name, family:$('productCategory').value, price:$('productPrice').value === '' ? null : Number($('productPrice').value), qty:$('productQty').value === '' ? null : Number($('productQty').value), hidden:$('productVisibility').value === 'hidden', images:{...draftImages}};
   if (editingId) catalogue.products[catalogue.products.findIndex(item => item.id === editingId)] = product;
   else catalogue.products.unshift(product);
   $('productDialog').close(); setDirty(); message(`${name} updated. Save to publish.`);
