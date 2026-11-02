@@ -46,7 +46,7 @@ function renderAll() {
   const selected = $('categoryFilter').value;
   $('categoryFilter').replaceChildren(...categories.map(category => option(category)));
   $('categoryFilter').value = categories.includes(selected) ? selected : 'All categories';
-  for (const id of ['bulkFrom', 'bulkTo', 'productCategory']) {
+  for (const id of ['bulkFrom', 'bulkTo', 'codeCategory', 'productCategory']) {
     const select = $(id), current = select.value;
     const names = id === 'bulkTo' ? ['', ...catalogue.categories] : catalogue.categories;
     select.replaceChildren(...names.map(name => option(name, name || 'Keep current category')));
@@ -72,7 +72,7 @@ function renderProducts() {
     const image = document.createElement('img'); image.src = '../' + (product.images.folded || Object.values(product.images)[0]); image.alt = '';
     const details = document.createElement('div');
     const title = document.createElement('h3'); title.textContent = product.name;
-    const meta = document.createElement('p'); meta.textContent = `${product.sku || 'SKU missing'} · ${product.family}`;
+    const meta = document.createElement('p'); meta.textContent = `${product.sku || 'Design code missing'} · ${product.family}`;
     details.append(title, meta);
     const price = document.createElement('strong'); price.textContent = money(product.price);
     const edit = document.createElement('button'); edit.className = 'secondary'; edit.textContent = 'Edit ↗'; edit.addEventListener('click', () => openEditor(product));
@@ -211,10 +211,10 @@ function renderImages() {
 $('productForm').addEventListener('submit', event => {
   event.preventDefault();
   const id = $('productId').value.trim(), name = $('productName').value.trim(), sku = $('productSku').value.trim().toUpperCase();
-  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id)) return message('Use lowercase letters, numbers and hyphens in the design code.', true);
-  if (!/^SDM\d{2}-\d{2}$/.test(sku) || sku.endsWith('-00') || sku.slice(3, 5) === '00') return message('Use a SKU such as SDM01-01.', true);
-  if (catalogue.products.some(product => product.sku === sku && product.id !== editingId)) return message('That SKU already exists.', true);
-  if (!editingId && catalogue.products.some(product => product.id === id)) return message('That design code already exists.', true);
+  if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id)) return message('Use lowercase letters, numbers and hyphens in the internal link ID.', true);
+  if (!/^SDM(?:0[1-9]|[1-9][0-9])-(?:0[1-9]|[1-9][0-9])$/.test(sku)) return message('Use a design code such as SDM01-01.', true);
+  if (catalogue.products.some(product => product.sku === sku && product.id !== editingId)) return message('That design code already exists.', true);
+  if (!editingId && catalogue.products.some(product => product.id === id)) return message('That internal link ID already exists.', true);
   if (!Object.keys(draftImages).length) return message('Add at least one image.', true);
   const product = {id, sku, name, family:$('productCategory').value, price:$('productPrice').value === '' ? null : Number($('productPrice').value), images:{...draftImages}};
   if (editingId) catalogue.products[catalogue.products.findIndex(item => item.id === editingId)] = product;
@@ -246,10 +246,21 @@ $('bulkForm').addEventListener('submit', event => {
   setDirty(); message(`Updated ${matching.length} designs. Save to publish.`);
 });
 
-$('assignSkus').addEventListener('click', () => {
-  if (catalogue.products.length > 9801) return message('Too many designs for the SKU format.', true);
-  catalogue.products.forEach((product, index) => { product.sku = skuFor(index + 1); });
-  setDirty(); message(`Renumbered ${catalogue.products.length} SKUs. Review and save to publish.`);
+$('categoryCodesForm').addEventListener('submit', event => {
+  event.preventDefault();
+  const category = $('codeCategory').value;
+  const start = $('codeStart').value.trim().toUpperCase();
+  if (!/^SDM(?:0[1-9]|[1-9][0-9])-(?:0[1-9]|[1-9][0-9])$/.test(start)) return message('Enter a first design code such as SDM02-01.', true);
+  const matching = catalogue.products.filter(product => product.family === category);
+  if (!matching.length) return message(`There are no designs in ${category}.`, true);
+  const first = (Number(start.slice(3, 5)) - 1) * 99 + Number(start.slice(6));
+  if (first + matching.length - 1 > 9801) return message('The sequence exceeds SDM99-99.', true);
+  const proposed = matching.map((product, index) => skuFor(first + index));
+  const outside = new Set(catalogue.products.filter(product => product.family !== category).map(product => product.sku));
+  const conflict = proposed.find(code => outside.has(code));
+  if (conflict) return message(`${conflict} is used by another category. Choose another first design code.`, true);
+  matching.forEach((product, index) => { product.sku = proposed[index]; });
+  setDirty(); message(`Renumbered ${matching.length} design codes in ${category}. Review and save to publish.`);
 });
 
 function download(name, content, type) {

@@ -9,8 +9,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20261102-2">
-  <script src="app.js?v=20261102-2" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20261102-3">
+  <script src="app.js?v=20261102-3" defer></script>
 </head>
 <body>
   <div class="announcement">A collection to make every occasion your own <span>✦</span> Explore the catalogue below</div>
@@ -46,8 +46,8 @@
 
     <section class="collection" id="collection" aria-labelledby="collection-title">
       <div class="section-heading"><div><span class="eyebrow">BROWSE & DISCOVER</span><h2 id="collection-title">The collection<span class="title-accent">.</span></h2><p>Every design has a story. Find the one that speaks to you.</p></div><span class="collection-count" id="collectionCount"></span></div>
-      <div class="catalogue-tools"><label class="search-box"><span aria-hidden="true">⌕</span><span class="sr-only">Search by colour, design or SKU</span><input id="search" type="search" placeholder="Search colours, designs or SKU…" autocomplete="off"></label><div class="filters" id="filters" aria-label="Filter designs"></div></div>
-      <div class="collection-refine"><label>Sort by<select id="sortProducts"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option></select></label></div>
+      <div class="catalogue-tools"><label class="search-box"><span aria-hidden="true">⌕</span><span class="sr-only">Search by colour, design or design code</span><input id="search" type="search" placeholder="Search colours, designs or code…" autocomplete="off"></label><div class="filters" id="filters" aria-label="Filter designs"></div></div>
+      <div class="collection-refine"><select id="sortProducts" aria-label="Sort designs"><option value="newest">Newest first</option><option value="oldest">Oldest first</option><option value="price-asc">Price: low to high</option><option value="price-desc">Price: high to low</option></select></div>
       <div class="product-grid" id="productGrid" aria-live="polite"></div>
       <p class="empty-state" id="emptyState" hidden>No designs match your search. Try another colour or pattern.</p>
     </section>
@@ -59,7 +59,7 @@
 
   <button class="floating-selection" type="button" id="floatingSelection" hidden><span>View selection</span><span class="floating-count" id="floatingCount">0</span><span aria-hidden="true">↗</span></button>
 
-  <div class="overlay" id="detailOverlay" hidden><div class="scrim" data-close="detail"></div><section class="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detailTitle"><button class="icon-close" type="button" data-close="detail" aria-label="Close details">×</button><div class="detail-media"><img id="detailImage" alt=""><div class="detail-thumbs" id="detailThumbs"></div></div><div class="detail-copy"><span class="eyebrow">TANEE · SAREE COLLECTION</span><h2 id="detailTitle"></h2><p>Explore the available views of this design.</p><div class="detail-divider"></div><span class="detail-label">SKU</span><strong id="detailCode"></strong><span class="detail-label">PRICE</span><strong id="detailPrice"></strong><button class="primary-button detail-add" type="button" id="detailAdd"></button><p class="detail-note">Enquire on WhatsApp for availability.</p></div></section></div>
+  <div class="overlay" id="detailOverlay" hidden><div class="scrim" data-close="detail"></div><section class="detail-panel" role="dialog" aria-modal="true" aria-labelledby="detailTitle"><button class="icon-close" type="button" data-close="detail" aria-label="Close details">×</button><div class="detail-media"><img id="detailImage" alt=""><div class="detail-thumbs" id="detailThumbs"></div></div><div class="detail-copy"><span class="eyebrow">TANEE · SAREE COLLECTION</span><h2 id="detailTitle"></h2><p>Explore the available views of this design.</p><div class="detail-divider"></div><span class="detail-label">DESIGN CODE</span><strong id="detailCode"></strong><span class="detail-label">PRICE</span><strong id="detailPrice"></strong><button class="primary-button detail-add" type="button" id="detailAdd"></button><p class="detail-note">Enquire on WhatsApp for availability.</p></div></section></div>
 
   <div class="overlay" id="selectionOverlay" hidden><div class="scrim" data-close="selection"></div><section class="selection-panel" role="dialog" aria-modal="true" aria-labelledby="selectionTitle"><div class="panel-top"><div><span class="eyebrow">YOUR FAVOURITES</span><h2 id="selectionTitle">My selection <span id="selectionCount">(0)</span></h2></div><button class="icon-close" type="button" data-close="selection" aria-label="Close selection">×</button></div><div class="selection-items" id="selectionItems"></div><div class="panel-bottom"><p>Your selected designs will be listed in a prefilled WhatsApp message.</p><a class="primary-button whatsapp-button" id="whatsappLink" href="#" target="_blank" rel="noopener noreferrer">Send enquiry on WhatsApp <span aria-hidden="true">↗</span></a></div></section></div>
 </body>

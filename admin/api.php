@@ -124,9 +124,9 @@ function validateCatalogue(array $data): array {
     foreach ($data['products'] as $product) {
         if (!is_array($product)) respond(422, ['error' => 'Invalid product.']);
         $id = $product['id'] ?? ''; $name = $product['name'] ?? ''; $family = $product['family'] ?? '';
-        if (!is_string($id) || !preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', $id) || strlen($id) > 80 || isset($ids[$id])) respond(422, ['error' => 'Invalid or duplicate design code.']);
+        if (!is_string($id) || !preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', $id) || strlen($id) > 80 || isset($ids[$id])) respond(422, ['error' => 'Invalid or duplicate internal link ID.']);
         $sku = $product['sku'] ?? '';
-        if (!is_string($sku) || !preg_match('/^SDM(?:0[1-9]|[1-9][0-9])-(?:0[1-9]|[1-9][0-9])$/', $sku) || isset($skus[$sku])) respond(422, ['error' => 'Invalid or duplicate SKU.']);
+        if (!is_string($sku) || !preg_match('/^SDM(?:0[1-9]|[1-9][0-9])-(?:0[1-9]|[1-9][0-9])$/', $sku) || isset($skus[$sku])) respond(422, ['error' => 'Invalid or duplicate design code.']);
         if (!is_string($name) || trim($name) === '' || strlen($name) > 300) respond(422, ['error' => 'Product name is missing or too long.']);
         if (!in_array($family, $categories, true)) respond(422, ['error' => 'Every product needs a valid category.']);
         $price = $product['price'] ?? null;
