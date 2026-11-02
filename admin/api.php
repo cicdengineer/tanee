@@ -30,8 +30,33 @@ function catalogue(): array {
     if (array_is_list($decoded)) {
         $categories = array_values(array_unique(array_map(fn($p) => (string)($p['family'] ?? ''), $decoded)));
         $content = json_decode((string)file_get_contents($contentFile), true);
-        return ['categories' => $categories, 'products' => $decoded, 'banners' => $content['banners'] ?? []];
+        $decoded = ['categories' => $categories, 'products' => $decoded, 'banners' => $content['banners'] ?? []];
     }
+    // Older server-side catalogues have no SKU; preserve seeded product assignments.
+    $seed = json_decode((string)file_get_contents($sourceFile), true);
+    $seedProducts = array_is_list($seed) ? $seed : ($seed['products'] ?? []);
+    $seedSkus = [];
+    foreach ($seedProducts as $product) if (isset($product['id'], $product['sku'])) $seedSkus[$product['id']] = $product['sku'];
+    $used = [];
+    foreach ($decoded['products'] as $product) if (!empty($product['sku'])) $used[$product['sku']] = true;
+    $reserved = [];
+    foreach ($decoded['products'] as $product) {
+        if (!empty($product['sku'])) continue;
+        $seedSku = $seedSkus[$product['id'] ?? ''] ?? null;
+        if ($seedSku !== null && !isset($used[$seedSku])) $reserved[$seedSku] = true;
+    }
+    $next = 1;
+    foreach ($decoded['products'] as &$product) {
+        if (!empty($product['sku'])) continue;
+        $seedSku = $seedSkus[$product['id'] ?? ''] ?? null;
+        if ($seedSku !== null && !isset($used[$seedSku])) $sku = $seedSku;
+        else {
+            do { $sku = sprintf('SDM%02d-%02d', intdiv($next - 1, 99) + 1, ($next - 1) % 99 + 1); $next++; } while (isset($used[$sku]) || isset($reserved[$sku]));
+        }
+        $product['sku'] = $sku;
+        $used[$sku] = true;
+    }
+    unset($product);
     return $decoded;
 }
 
@@ -95,11 +120,13 @@ function validateCatalogue(array $data): array {
         if (!is_string($category) || !preg_match('/^[\p{L}\p{N} &-]{1,50}$/u', $category) || in_array($category, $categories, true)) respond(422, ['error' => 'Invalid or duplicate category.']);
         $categories[] = trim($category);
     }
-    $products = []; $ids = [];
+    $products = []; $ids = []; $skus = [];
     foreach ($data['products'] as $product) {
         if (!is_array($product)) respond(422, ['error' => 'Invalid product.']);
         $id = $product['id'] ?? ''; $name = $product['name'] ?? ''; $family = $product['family'] ?? '';
         if (!is_string($id) || !preg_match('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', $id) || strlen($id) > 80 || isset($ids[$id])) respond(422, ['error' => 'Invalid or duplicate design code.']);
+        $sku = $product['sku'] ?? '';
+        if (!is_string($sku) || !preg_match('/^SDM(?:0[1-9]|[1-9][0-9])-(?:0[1-9]|[1-9][0-9])$/', $sku) || isset($skus[$sku])) respond(422, ['error' => 'Invalid or duplicate SKU.']);
         if (!is_string($name) || trim($name) === '' || strlen($name) > 300) respond(422, ['error' => 'Product name is missing or too long.']);
         if (!in_array($family, $categories, true)) respond(422, ['error' => 'Every product needs a valid category.']);
         $price = $product['price'] ?? null;
@@ -112,7 +139,8 @@ function validateCatalogue(array $data): array {
             $cleanImages[$view] = $path;
         }
         $ids[$id] = true;
-        $products[] = ['id' => $id, 'name' => trim($name), 'family' => $family, 'price' => $price === null ? null : round((float)$price, 2), 'images' => $cleanImages];
+        $skus[$sku] = true;
+        $products[] = ['id' => $id, 'sku' => $sku, 'name' => trim($name), 'family' => $family, 'price' => $price === null ? null : round((float)$price, 2), 'images' => $cleanImages];
     }
     $banners = [];
     foreach ($data['banners'] as $banner) {

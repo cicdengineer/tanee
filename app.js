@@ -10,7 +10,7 @@ let lastFocus = null;
 
 const byId = id => products.find(product => product.id === id);
 const imagePath = (product, view = 'folded') => product.images[view] || product.images.body || Object.values(product.images)[0];
-const designCode = product => `TANEE-${product.id.toUpperCase()}`;
+const designCode = product => product.sku || `TANEE-${product.id.toUpperCase()}`;
 const priceLabel = product => product.price == null ? null : new Intl.NumberFormat('en-IN', {style:'currency', currency:'INR', maximumFractionDigits:2}).format(product.price);
 
 let banners = [
@@ -123,10 +123,22 @@ function renderFilters() {
 
 function renderProducts() {
   const query = search.value.trim().toLowerCase();
+  const minPrice = document.getElementById('minPrice').value;
+  const maxPrice = document.getElementById('maxPrice').value;
   const visible = products.filter(product =>
     (activeFamily === 'All' || product.family === activeFamily) &&
-    (product.name.toLowerCase().includes(query) || product.family.toLowerCase().includes(query))
+    (product.name.toLowerCase().includes(query) || product.family.toLowerCase().includes(query) || designCode(product).toLowerCase().includes(query)) &&
+    (minPrice === '' || (product.price != null && Number(product.price) >= Number(minPrice))) &&
+    (maxPrice === '' || (product.price != null && Number(product.price) <= Number(maxPrice)))
   );
+  const sort = document.getElementById('sortProducts').value;
+  if (sort === 'oldest') visible.reverse();
+  if (sort === 'price-asc' || sort === 'price-desc') visible.sort((a, b) => {
+    if (a.price == null && b.price == null) return 0;
+    if (a.price == null) return 1;
+    if (b.price == null) return -1;
+    return sort === 'price-asc' ? Number(a.price) - Number(b.price) : Number(b.price) - Number(a.price);
+  });
   document.getElementById('collectionCount').textContent = `${visible.length} designs`;
   document.getElementById('emptyState').hidden = visible.length !== 0;
   productGrid.replaceChildren();
@@ -259,6 +271,13 @@ document.addEventListener('keydown', event => {
   }
 });
 search.addEventListener('input', renderProducts);
+for (const id of ['sortProducts', 'minPrice', 'maxPrice']) document.getElementById(id).addEventListener(id === 'sortProducts' ? 'change' : 'input', renderProducts);
+document.getElementById('clearRefine').addEventListener('click', () => {
+  document.getElementById('sortProducts').value = 'newest';
+  document.getElementById('minPrice').value = '';
+  document.getElementById('maxPrice').value = '';
+  renderProducts();
+});
 
 async function loadCatalogue() {
   const response = await fetch('admin/api.php?route=public', {cache:'no-store'});

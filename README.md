@@ -4,7 +4,7 @@ A responsive saree catalogue. Customers can browse 60 designs, inspect available
 
 ## Catalogue admin
 
-The admin panel is at `/admin/`. It supports individual design edits, image uploads, categories, banners, prices, category-wide changes, CSV price imports, and JSON backups/imports. Prices are shown in Indian rupees and included in WhatsApp enquiries when set.
+The admin panel is at `/admin/`. It supports individual design edits, image uploads, categories, banners, prices, category-wide changes, CSV price imports, bulk SKU renumbering, and JSON backups/imports. Each design has a customer-facing SKU in `SDM01-01` format. The initial 60 designs use `SDM01-01` through `SDM01-60`; new designs receive the next available SKU. Older saved catalogues receive these SKUs automatically when loaded by the updated API. Prices are shown in Indian rupees and included in WhatsApp enquiries when set.
 
 The admin API requires PHP 8.2 or later with the `fileinfo` extension. Hostinger's PHP/HTML hosting supports this setup. The admin's writable data must stay **outside `public_html`**, so Git redeployments do not erase edits or uploads. By default, the API uses a `tanee-data` directory alongside `public_html`. You can override this with the `TANEE_DATA_DIR` environment variable.
 
@@ -18,7 +18,7 @@ The tool reads the password from standard input without echoing it. Transfer the
 
 For a local functional preview, run PHP with `TANEE_DATA_DIR` pointing to `.private/tanee-data` and serve the repository root. A plain static HTTP server can preview the storefront but cannot execute the admin API.
 
-The homepage rotates through five banners supplied in `wallpapers/`. Smaller WebP copies in `assets/banners/` are served to visitors. The text and colour treatment change with each banner; the catalogue and WhatsApp selection work as before.
+The homepage rotates through five banners supplied in `wallpapers/`. Smaller WebP copies in `assets/banners/` are served to visitors. The collection supports category, search, price range, and ordering controls. The popup and WhatsApp selection show each design's SKU.
 
 ## Preview
 

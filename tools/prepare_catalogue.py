@@ -47,7 +47,9 @@ for folder in sorted(SOURCE.iterdir()):
         images[view.lower()] = f'assets/products/{target.name}'
     if images:
         family = next((part for part in ('Ornate', 'Twill', 'Diamond', 'Check', 'Temple', 'Zigzag') if part.lower() in name.lower()), 'Classic')
-        products.append({'id': slug, 'name': name, 'family': family, 'images': images})
+        number = len(products) + 1
+        sku = f'SDM{(number - 1) // 99 + 1:02d}-{(number - 1) % 99 + 1:02d}'
+        products.append({'id': slug, 'sku': sku, 'name': name, 'family': family, 'images': images})
 
 (ROOT / 'catalogue.json').write_text(json.dumps(products, indent=2), encoding='utf-8')
 print(f'Prepared {len(products)} designs and {sum(len(p["images"]) for p in products)} images.')

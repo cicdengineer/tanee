@@ -2,6 +2,12 @@ const apiUrl = route => `api.php?route=${route}`;
 const $ = id => document.getElementById(id);
 const money = value => value == null ? 'Price not set' : new Intl.NumberFormat('en-IN', {style:'currency', currency:'INR', maximumFractionDigits:2}).format(value);
 const views = ['folded', 'body', 'pallu', 'blouse'];
+const skuFor = number => `SDM${String(Math.floor((number - 1) / 99) + 1).padStart(2, '0')}-${String((number - 1) % 99 + 1).padStart(2, '0')}`;
+function nextSku() {
+  const used = new Set(catalogue.products.map(product => product.sku));
+  for (let number = 1; number <= 9801; number++) if (!used.has(skuFor(number))) return skuFor(number);
+  return '';
+}
 let csrf = null;
 let catalogue = {categories:[], products:[], banners:[]};
 let savedVersion = '';
@@ -58,7 +64,7 @@ function renderProducts() {
   const category = $('categoryFilter').value;
   const shown = catalogue.products.filter(product =>
     (category === 'All categories' || product.family === category) &&
-    (product.name.toLowerCase().includes(query) || product.id.includes(query)));
+    (product.name.toLowerCase().includes(query) || product.id.includes(query) || (product.sku || '').toLowerCase().includes(query)));
   const list = $('productList'); list.replaceChildren();
   if (!shown.length) { const empty = document.createElement('p'); empty.className = 'empty'; empty.textContent = 'No designs match this search.'; list.append(empty); }
   for (const product of shown) {
@@ -66,7 +72,7 @@ function renderProducts() {
     const image = document.createElement('img'); image.src = '../' + (product.images.folded || Object.values(product.images)[0]); image.alt = '';
     const details = document.createElement('div');
     const title = document.createElement('h3'); title.textContent = product.name;
-    const meta = document.createElement('p'); meta.textContent = `TANEE-${product.id.toUpperCase()} · ${product.family}`;
+    const meta = document.createElement('p'); meta.textContent = `${product.sku || 'SKU missing'} · ${product.family}`;
     details.append(title, meta);
     const price = document.createElement('strong'); price.textContent = money(product.price);
     const edit = document.createElement('button'); edit.className = 'secondary'; edit.textContent = 'Edit ↗'; edit.addEventListener('click', () => openEditor(product));
@@ -171,6 +177,7 @@ function openEditor(product = null) {
   $('editorTitle').textContent = product ? 'Edit design' : 'Add a design';
   $('productId').value = product?.id || '';
   $('productId').readOnly = !!product;
+  $('productSku').value = product?.sku || nextSku();
   $('productName').value = product?.name || '';
   $('productCategory').replaceChildren(...catalogue.categories.map(name => option(name)));
   $('productCategory').value = product?.family || catalogue.categories[0] || '';
@@ -203,11 +210,13 @@ function renderImages() {
 
 $('productForm').addEventListener('submit', event => {
   event.preventDefault();
-  const id = $('productId').value.trim(), name = $('productName').value.trim();
+  const id = $('productId').value.trim(), name = $('productName').value.trim(), sku = $('productSku').value.trim().toUpperCase();
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id)) return message('Use lowercase letters, numbers and hyphens in the design code.', true);
+  if (!/^SDM\d{2}-\d{2}$/.test(sku) || sku.endsWith('-00') || sku.slice(3, 5) === '00') return message('Use a SKU such as SDM01-01.', true);
+  if (catalogue.products.some(product => product.sku === sku && product.id !== editingId)) return message('That SKU already exists.', true);
   if (!editingId && catalogue.products.some(product => product.id === id)) return message('That design code already exists.', true);
   if (!Object.keys(draftImages).length) return message('Add at least one image.', true);
-  const product = {id, name, family:$('productCategory').value, price:$('productPrice').value === '' ? null : Number($('productPrice').value), images:{...draftImages}};
+  const product = {id, sku, name, family:$('productCategory').value, price:$('productPrice').value === '' ? null : Number($('productPrice').value), images:{...draftImages}};
   if (editingId) catalogue.products[catalogue.products.findIndex(item => item.id === editingId)] = product;
   else catalogue.products.unshift(product);
   $('productDialog').close(); setDirty(); message(`${name} updated. Save to publish.`);
@@ -235,6 +244,12 @@ $('bulkForm').addEventListener('submit', event => {
   const matching = catalogue.products.filter(product => product.family === from);
   for (const product of matching) { if (to) product.family = to; if (price !== '') product.price = Number(price); }
   setDirty(); message(`Updated ${matching.length} designs. Save to publish.`);
+});
+
+$('assignSkus').addEventListener('click', () => {
+  if (catalogue.products.length > 9801) return message('Too many designs for the SKU format.', true);
+  catalogue.products.forEach((product, index) => { product.sku = skuFor(index + 1); });
+  setDirty(); message(`Renumbered ${catalogue.products.length} SKUs. Review and save to publish.`);
 });
 
 function download(name, content, type) {
